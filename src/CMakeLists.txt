@@ -1,8 +1,8 @@
-if(MSVC)
-    string(REGEX REPLACE "/W[1-3]" "/W4" "/O1" "/O2" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-else()
-    add_compile_options(-Wall -Wextra -pedantic -Werror -O3)
-endif()
+#if(MSVC)
+#    string(REGEX REPLACE "/W[1-3]" "/W4" "/O1" "/O2" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
+#else()
+#    add_compile_options(-Wall -Wextra -pedantic -Werror -O3)
+#endif()
 
 set(EXECUTABLE_NAME ${PROJECT_NAME})
 
@@ -44,10 +44,18 @@ target_include_directories(${EXECUTABLE_NAME}
     ${implot_SOURCE_DIR}/
 )
 
-target_link_libraries(${EXECUTABLE_NAME}
-    PRIVATE
-    glfw
-    libglew_static
-    #$<$<CXX_COMPILER_ID:GNU>:opengl32.a>
-    #$<$<CXX_COMPILER_ID:MSVC>:opengl32.lib>
-)
+if(WIN32)
+    target_link_libraries(${EXECUTABLE_NAME}
+        PRIVATE
+        glfw
+        libglew_static
+        $<$<CXX_COMPILER_ID:GNU>:opengl32.a>
+        $<$<CXX_COMPILER_ID:MSVC>:opengl32.lib>
+    )
+else()
+    target_link_libraries(${EXECUTABLE_NAME}
+        PRIVATE
+        glfw
+        libglew_static
+    )
+endif()

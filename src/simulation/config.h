@@ -2,12 +2,8 @@
 
 namespace kiv_vss
 {
-    class Config
+    struct Config
     {
-    public:
-        Config() = default;
-        ~Config() = default;
-
         double World_Size = 5000;
         size_t Number_Of_Popular_Places = 10;
         size_t Number_Of_People = 1000;

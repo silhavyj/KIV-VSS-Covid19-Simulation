@@ -65,7 +65,7 @@ namespace kiv_vss
         for (size_t i = 0; i < kiv_vss::Singleton<kiv_vss::Config>::Get_Instance()->Number_Of_Initially_Infected_People; ++i)
         {
             auto person_it = m_people.end();
-            std::advance(person_it, -(i + 1));
+            person_it -= (i + 1);
             person_it->Infect();
         }
         m_number_of_infected_people = kiv_vss::Singleton<kiv_vss::Config>::Get_Instance()->Number_Of_Initially_Infected_People;
