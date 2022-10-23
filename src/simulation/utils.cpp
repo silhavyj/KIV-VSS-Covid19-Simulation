@@ -1,4 +1,4 @@
-#include <cassert>
+#include "spdlog/spdlog.h"
 
 #include "utils.h"
 
@@ -18,8 +18,11 @@ namespace kiv_vss::utils
         {
             probabilities[i] += probabilities[i - 1];
         }
-        // TODO print out an error message
-        assert((probabilities.back() - 1.0) < 0.0001);
+        if ((probabilities.back() - 1.0) > 0.0001)
+        {
+            spdlog::error("ERROR: Sum of all probabilities must add up to 1.0. Returning 0 as the default value");
+            return 0;
+        }
 
         std::random_device rand_dev{};
         std::uniform_real_distribution<> uniform_dist{};

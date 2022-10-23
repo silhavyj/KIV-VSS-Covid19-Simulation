@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stddef.h>
+
 namespace kiv_vss
 {
     struct Config
@@ -14,7 +16,6 @@ namespace kiv_vss
         double Disease_Transmission_Distance = 5;
         double Disease_Transmission_Probability = 0.70;
 
-        // mobility
         size_t Average_Person_Mobility_Speed = 4;
         double Max_Hours_Spent_At_Location = 8;
 
@@ -26,10 +27,7 @@ namespace kiv_vss
         double Go_To_Random_Location_Probability_2 = 0.20;
 
         size_t Average_Infection_Period = 24 * 14;
-        size_t Infection_Period_Variance = 24 * 5;
-
-        size_t Covid_Immunity_Period = 24 * 60;
-        size_t Covid_Immunity_Variance = 24 * 10;
+        size_t Average_Immunity_Period = 24 * 60;
 
         double Death_Probability = 0.15;
     };

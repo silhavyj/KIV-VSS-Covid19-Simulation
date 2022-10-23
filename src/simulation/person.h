@@ -16,32 +16,24 @@ namespace kiv_vss
         };
 
     public:
-        explicit CPerson(const CLocation& location, const bool self_isolating);
+        explicit CPerson(const CLocation& location);
         ~CPerson() = default;
 
         [[nodiscard]] CLocation& Get_Current_Location();
         [[nodiscard]] const CLocation& Get_Home_Location() const;
+        [[nodiscard]] bool Is_Home() const;
+
         [[nodiscard]] bool Is_Alive() const;
         [[nodiscard]] bool Is_Infected() const;
         [[nodiscard]] bool Is_Vulnerable() const;
         [[nodiscard]] bool Is_Immune() const;
-        [[nodiscard]] bool Is_Self_Isolating() const;
-        [[nodiscard]] bool Is_Home() const;
+
         [[nodiscard]] NInfection_State Get_Infection_State() const;
-
-        void Infect();
-        void Progress_Infection();
-
-    private:
-        static size_t Generate_Random_Infection_Period();
-        static size_t Generate_Random_Immunity_Period();
+        void Set_Infection_State(const NInfection_State infection_state);
 
     private:
         CLocation m_home;
         CLocation m_current_location;
-        bool m_self_isolating;
         NInfection_State m_infection_state;
-        size_t m_counter;
-        size_t m_infection_counter;
     };
 }

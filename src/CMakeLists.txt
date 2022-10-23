@@ -47,6 +47,7 @@ if(WIN32)
         PRIVATE
         glfw
         libglew_static
+        spdlog
         $<$<CXX_COMPILER_ID:GNU>:opengl32.a>
         $<$<CXX_COMPILER_ID:MSVC>:opengl32.lib>
     )
@@ -55,5 +56,6 @@ else()
         PRIVATE
         glfw
         libglew_static
+        spdlog
     )
 endif()

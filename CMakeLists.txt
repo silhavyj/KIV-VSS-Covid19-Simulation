@@ -37,7 +37,13 @@ FetchContent_Declare(
     GIT_TAG v0.14
 )
 
-FetchContent_MakeAvailable(glew glfw imgui implot)
+FetchContent_Declare(
+    spdlog
+    GIT_REPOSITORY https://github.com/gabime/spdlog
+    GIT_TAG v1.10.0
+)
+
+FetchContent_MakeAvailable(glew glfw imgui implot spdlog)
 
 set_property(DIRECTORY ${glew_SOURCE_DIR} PROPERTY EXCLUDE_FROM_ALL YES)
 set_property(DIRECTORY ${glfw_SOURCE_DIR} PROPERTY EXCLUDE_FROM_ALL YES)
