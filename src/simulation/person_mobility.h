@@ -16,7 +16,7 @@ namespace kiv_vss
         CPerson* Get_Person() const;
 
     private:
-        void Pick_Next_Location();
+        CLocation Pick_Next_Location();
         CLocation Generate_Random_Popular_Location() const;
 
         static double Generate_Random_Speed();

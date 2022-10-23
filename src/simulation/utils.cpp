@@ -4,11 +4,10 @@
 
 namespace kiv_vss::utils
 {
-    static std::random_device rand_dev{};
-    static std::uniform_real_distribution<> uniform_dist{};
-
     bool Try_Event(double probability)
     {
+        std::random_device rand_dev{};
+        std::uniform_real_distribution<> uniform_dist{};
         return uniform_dist(rand_dev) <= probability;
     }
 
@@ -19,7 +18,11 @@ namespace kiv_vss::utils
         {
             probabilities[i] += probabilities[i - 1];
         }
+        // TODO print out an error message
         assert((probabilities.back() - 1.0) < 0.0001);
+
+        std::random_device rand_dev{};
+        std::uniform_real_distribution<> uniform_dist{};
 
         double value = uniform_dist(rand_dev);
         auto it = std::upper_bound(probabilities.begin(), probabilities.end(), value);

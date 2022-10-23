@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <cstddef>
+#include <unordered_set>
 
 #include "location.h"
 #include "person.h"
@@ -35,6 +36,8 @@ namespace kiv_vss
 
     private:
         std::vector<CPerson> m_people;
+        std::unordered_set<CPerson *> m_infected_people;
+        std::unordered_set<CPerson *> m_vulnerable_people;
         std::vector<CPerson_Mobility> m_person_mobility;
         std::vector<CLocation> m_popular_locations;
         size_t m_number_of_infected_people;

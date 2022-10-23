@@ -1,15 +1,13 @@
-#if(MSVC)
-#    string(REGEX REPLACE "/W[1-3]" "/W4" "/O1" "/O2" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-#else()
-#    add_compile_options(-Wall -Wextra -pedantic -Werror -O3)
-#endif()
-
 set(EXECUTABLE_NAME ${PROJECT_NAME})
 
 file(GLOB_RECURSE cpp_files "./*.cpp")
+file(GLOB_RECURSE h_files "./*.h")
+file(GLOB_RECURSE hpp_files "./*.hpp")
 
 add_executable(${EXECUTABLE_NAME}
     ${cpp_files}
+    ${h_files}
+    ${hpp_files}
 
     ${imgui_SOURCE_DIR}/imgui.cpp
     ${imgui_SOURCE_DIR}/imgui.h

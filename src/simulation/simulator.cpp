@@ -25,7 +25,8 @@ namespace kiv_vss
 
     size_t CSimulator::Get_Number_Of_Infected_People() const
     {
-        return m_number_of_infected_people;
+        // return m_number_of_infected_people;
+        return m_infected_people.size();
     }
 
     size_t CSimulator::Get_Number_Of_Fatalities() const
@@ -61,12 +62,15 @@ namespace kiv_vss
         for (auto& person : m_people)
         {
             m_person_mobility.emplace_back(&person, &m_popular_locations);
+            m_vulnerable_people.insert(&person);
         }
         for (size_t i = 0; i < kiv_vss::Singleton<kiv_vss::Config>::Get_Instance()->Number_Of_Initially_Infected_People; ++i)
         {
             auto person_it = m_people.end();
             person_it -= (i + 1);
             person_it->Infect();
+            m_vulnerable_people.erase(person_it.base());
+            m_infected_people.insert(person_it.base());
         }
         m_number_of_infected_people = kiv_vss::Singleton<kiv_vss::Config>::Get_Instance()->Number_Of_Initially_Infected_People;
     }
@@ -77,12 +81,40 @@ namespace kiv_vss
         {
             mobility.Update();
             mobility.Get_Person()->Progress_Infection();
+            const auto& person = mobility.Get_Person();
+            if (!person->Is_Infected() && m_infected_people.count(person))
+            {
+                m_infected_people.erase(person);
+            }
+            if (person->Is_Vulnerable() && 0 == m_vulnerable_people.count(person))
+            {
+                m_vulnerable_people.insert(person);
+            }
         }
     }
 
     void CSimulator::Spread_Virus()
     {
-        const size_t size = m_people.size();
+        for (auto& person_i : m_infected_people)
+        {
+            for (auto& person_j : m_vulnerable_people)
+            {
+                if (Infects(*person_i, *person_j))
+                {
+                    if (person_i->Is_Vulnerable())
+                    {
+                        person_i->Infect();
+                        m_infected_people.insert(person_i);
+                    }
+                    else
+                    {
+                        person_j->Infect();
+                        m_infected_people.insert(person_j);
+                    }
+                }
+            }
+        }
+        /*const size_t size = m_people.size();
 
         m_number_of_infected_people = 0;
         m_number_of_fatalities = 0;
@@ -119,7 +151,7 @@ namespace kiv_vss
             {
                 ++m_number_of_immune_people;
             }
-        }
+        }*/
     }
 
     void CSimulator::Update()

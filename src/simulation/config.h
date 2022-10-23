@@ -15,8 +15,7 @@ namespace kiv_vss
         double Disease_Transmission_Probability = 0.70;
 
         // mobility
-        double Average_Person_Mobility_Speed = 4;
-        double Person_Mobility_Speed_Variance = 1.5;
+        size_t Average_Person_Mobility_Speed = 4;
         double Max_Hours_Spent_At_Location = 8;
 
         double Go_To_Popular_Location_Probability_1 = 0.4;

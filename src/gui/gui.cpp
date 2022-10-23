@@ -167,7 +167,7 @@ namespace kiv_vss::gui
             }
             mtx.unlock();
             ++hours;
-            std::this_thread::sleep_for(std::chrono::microseconds(25));
+            std::this_thread::sleep_for(std::chrono::microseconds(200));
         }
     }
 

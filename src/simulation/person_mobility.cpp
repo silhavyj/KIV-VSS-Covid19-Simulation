@@ -1,5 +1,3 @@
-#include <cassert>
-
 #include "person_mobility.h"
 #include "utils.h"
 #include "config.h"
@@ -13,7 +11,7 @@ namespace kiv_vss
           m_speed(Generate_Random_Speed()),
           m_state(NMobility_State::Headed_Home),
           m_moving(false),
-          m_next_location(Generate_Random_Location()),
+          m_next_location(Pick_Next_Location()),
           m_at_location_counter(Generate_Random_Hours_At_Location())
     {
 
@@ -42,7 +40,7 @@ namespace kiv_vss
             }
             else
             {
-                Pick_Next_Location();
+                m_next_location = Pick_Next_Location();
                 m_moving = true;
             }
         }
@@ -53,7 +51,7 @@ namespace kiv_vss
         return m_person;
     }
 
-    void CPerson_Mobility::Pick_Next_Location()
+    CLocation CPerson_Mobility::Pick_Next_Location()
     {
         std::vector<double> random_events;
 
@@ -71,21 +69,35 @@ namespace kiv_vss
 
         const auto event = static_cast<uint8_t>(utils::Pick_Event(random_events));
         const auto action = static_cast<NMobility_State>(event);
+        CLocation next_location {0,0};
 
         switch (action)
         {
             case NMobility_State::Headed_To_Random_Location:
-                m_next_location = Generate_Random_Location();
+                next_location = Generate_Random_Location();
                 break;
 
             case NMobility_State::Headed_To_Popular_Location:
-                m_next_location = Generate_Random_Popular_Location();
+                if (m_popular_locations->size())
+                {
+                    next_location = Generate_Random_Popular_Location();
+                }
+                else
+                {
+                    next_location = Generate_Random_Location();
+                }
                 break;
 
             case NMobility_State::Headed_Home:
-                m_next_location = m_person->Get_Home_Location();
+                next_location = m_person->Get_Home_Location();
+                break;
+
+            default:
+                // TODO log error message
                 break;
         }
+
+        return next_location;
     }
 
     inline CLocation CPerson_Mobility::Generate_Random_Popular_Location() const
@@ -96,15 +108,9 @@ namespace kiv_vss
 
     inline double CPerson_Mobility::Generate_Random_Speed()
     {
-        double speed;
-        do
-        {
-            speed = utils::Random<std::normal_distribution<double>>(
-                kiv_vss::Singleton<kiv_vss::Config>::Get_Instance()->Average_Person_Mobility_Speed,
-                kiv_vss::Singleton<kiv_vss::Config>::Get_Instance()->Person_Mobility_Speed_Variance
-            );
-        } while (speed < 0.0);
-        return speed;
+        return kiv_vss::utils::Random<std::poisson_distribution<size_t>>(
+            kiv_vss::Singleton<kiv_vss::Config>::Get_Instance()->Average_Person_Mobility_Speed
+        );
     }
 
     inline size_t CPerson_Mobility::Generate_Random_Hours_At_Location()
