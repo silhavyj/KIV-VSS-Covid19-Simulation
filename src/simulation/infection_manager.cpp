@@ -6,7 +6,7 @@ namespace kiv_vss
 {
      CInfection_Manger::CInfection_Manger(CPerson* person, bool initially_infected)
         : m_person(person),
-          m_config(Singleton<Config>::Get_Instance()),
+          m_config(Singleton<TConfig>::Get_Instance()),
           m_infection_counter(0),
           m_counter(0)
      {

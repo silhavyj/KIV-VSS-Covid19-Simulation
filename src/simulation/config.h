@@ -4,7 +4,7 @@
 
 namespace kiv_vss
 {
-    struct Config
+    struct TConfig
     {
         double World_Size = 5000;
         size_t Number_Of_Popular_Places = 10;
@@ -16,15 +16,26 @@ namespace kiv_vss
         double Disease_Transmission_Distance = 5;
         double Disease_Transmission_Probability = 0.70;
 
-        size_t Average_Person_Mobility_Speed = 4;
+        double Average_Person_Mobility_Speed = 4;
+        double Variance_Person_Mobility_Speed = 2;
         double Max_Hours_Spent_At_Location = 8;
 
         double Go_To_Popular_Location_Probability_1 = 0.4;
-        double Go_Home_Probability_1 = 0.4;
         double Go_To_Random_Location_Probability_1 = 0.2;
+        double Go_Home_Probability_1 = 0.4;
 
         double Go_To_Popular_Location_Probability_2 = 0.80;
         double Go_To_Random_Location_Probability_2 = 0.20;
+
+        double Go_To_Popular_Location_Probability_3 = 0.12;
+        double Go_To_Random_Location_Probability_3 = 0.12;
+        double Go_Home_Probability_3 = 0.76;
+
+        double Go_To_Popular_Location_Probability_4 = 0.05;
+        double Go_To_Random_Location_Probability_4 = 0.10;
+        double Go_Home_Probability_4 = 0.85;
+
+        double Self_Isolating_When_Infected = 0.35;
 
         size_t Average_Infection_Period = 24 * 14;
         size_t Average_Immunity_Period = 24 * 60;

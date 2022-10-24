@@ -20,7 +20,7 @@ namespace kiv_vss
 
     private:
         CPerson* m_person;
-        const Config* m_config;
+        const TConfig* m_config;
         size_t m_infection_counter;
         size_t m_counter;
     };

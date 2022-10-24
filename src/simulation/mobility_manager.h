@@ -16,11 +16,13 @@ namespace kiv_vss
         void Update();
 
     private:
-        CLocation Pick_Next_Location() const;
-        CLocation Pick_Random_Popular_Location() const;
-        CLocation Generate_Random_Location() const;
-        size_t Generate_Random_Hours_At_Location() const;
-        double Generate_Random_Speed() const;
+        void Check_Infection_State();
+
+        [[nodiscard]] CLocation Pick_Next_Location() const;
+        [[nodiscard]] CLocation Pick_Random_Popular_Location() const;
+        [[nodiscard]] CLocation Generate_Random_Location() const;
+        [[nodiscard]] size_t Generate_Random_Hours_At_Location() const;
+        [[nodiscard]] double Generate_Random_Speed() const;
 
     private:
         enum class NMobility_State : uint8_t
@@ -35,11 +37,13 @@ namespace kiv_vss
         CPerson* m_person;
         bool m_self_isolating;
         const std::vector<CLocation>* m_popular_locations;
-        const Config* m_config;
+        const TConfig* m_config;
         double m_speed;
         NMobility_State m_state;
         bool m_moving;
         CLocation m_next_location;
         size_t m_at_location_counter;
+        bool m_is_infected;
+        bool m_self_isolating_due_to_infection;
     };
 }
