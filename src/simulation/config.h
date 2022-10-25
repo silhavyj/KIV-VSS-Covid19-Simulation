@@ -7,14 +7,15 @@ namespace kiv_vss
     struct TConfig
     {
         double World_Size = 5000;
-        size_t Number_Of_Popular_Places = 10;
+        size_t Number_Of_Popular_Locations = 10;
         size_t Number_Of_People = 1000;
         float Ratio_Of_People_In_Self_Isolation = 0.5f;
-        double Downtown_Location = World_Size / 2.0;
+        double Downtown_Center_Location = World_Size / 2.0;
         double Downtown_Variance = World_Size * 0.15;
         size_t Number_Of_Initially_Infected_People = 5;
         double Disease_Transmission_Distance = 5;
-        double Disease_Transmission_Probability = 0.70;
+        double Disease_Transmission_Probability_On_Move = 0.65;
+        double Disease_Transmission_Probability_At_Home = 0.5;
 
         double Average_Person_Mobility_Speed = 4;
         double Variance_Person_Mobility_Speed = 2;

@@ -52,6 +52,16 @@ namespace kiv_vss
         }
     }
 
+    CPerson* CMobility_Manager::Get_Person() const
+    {
+        return m_person;
+    }
+
+    bool CMobility_Manager::Is_Self_Isolating()
+    {
+        return m_self_isolating;
+    }
+
     void CMobility_Manager::Check_Infection_State()
     {
         if (!m_is_infected && m_person->Is_Infected())

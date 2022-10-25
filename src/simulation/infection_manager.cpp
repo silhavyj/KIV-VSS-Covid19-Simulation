@@ -23,6 +23,11 @@ namespace kiv_vss
         ++m_infection_counter;
     }
 
+    CPerson* CInfection_Manger::Get_Person() const
+    {
+        return m_person;
+    }
+
     void CInfection_Manger::Update()
     {
         if (0 != m_counter)

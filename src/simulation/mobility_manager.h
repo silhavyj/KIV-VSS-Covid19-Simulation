@@ -14,6 +14,8 @@ namespace kiv_vss
         ~CMobility_Manager() = default;
 
         void Update();
+        CPerson* Get_Person() const;
+        bool Is_Self_Isolating();
 
     private:
         void Check_Infection_State();
