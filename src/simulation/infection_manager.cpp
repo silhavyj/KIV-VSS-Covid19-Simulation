@@ -30,6 +30,11 @@ namespace kiv_vss
          return m_person;
     }
 
+    size_t CInfection_Manger::Get_Infection_Count() const
+    {
+        return m_infection_counter;
+    }
+
     void CInfection_Manger::Update()
     {
         if (0 != m_counter)

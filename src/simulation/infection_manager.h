@@ -14,6 +14,7 @@ namespace kiv_vss
         void Infect();
         void Update();
         [[nodiscard]] CPerson* Get_Person() const;
+        [[nodiscard]] size_t Get_Infection_Count() const;
 
     private:
         [[nodiscard]] size_t Generate_Random_Infection_Period() const;

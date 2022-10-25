@@ -41,6 +41,11 @@ namespace kiv_vss
         return m_popular_locations;
     }
 
+    double CSimulator::Get_Number_Of_Infections_Per_Person() const
+    {
+        return m_number_of_infections_per_person;
+    }
+
     void CSimulator::Generate_Popular_Locations()
     {
         for (size_t i = 0; i < m_config->Number_Of_Popular_Locations; ++i)
@@ -86,6 +91,7 @@ namespace kiv_vss
 
     void CSimulator::Move_People_Around()
     {
+        m_number_of_infections_per_person = 0;
         for (auto& manager : m_mobility_managers)
         {
             manager.Update();
@@ -98,6 +104,7 @@ namespace kiv_vss
             {
                 m_fatalities.insert(person);
             }
+            m_number_of_infections_per_person += infection_manager->Get_Infection_Count();
 
             if (person->Is_Infected() && !m_infected_people_mngs.count(infection_manager))
             {
@@ -116,6 +123,7 @@ namespace kiv_vss
                 m_vulnerable_people_mngs.erase(infection_manager);
             }
         }
+        m_number_of_infections_per_person /= m_people.size();
     }
 
     void CSimulator::Spread_Virus()

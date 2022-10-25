@@ -16,6 +16,7 @@ namespace kiv_vss::gui
     static void Draw_Control_Panel();
     static void Draw_Settings_Panel();
     static void Draw_Charts();
+    static void Draw_Statistics();
     static void Draw_Person(CPerson& person, ImDrawList* draw_list);
     static void Draw_Popular_Location(const CLocation& location, ImDrawList* draw_list);
     static std::pair<ImVec2, ImVec2> Get_Windows_Boundaries();
@@ -27,7 +28,9 @@ namespace kiv_vss::gui
     static bool s_display_popular_locations = true;
     static bool s_stop_sim_whe_no_people_infected = true;
     static bool s_sim_running = false;
+    static double s_number_of_infections_per_person = 0;
     const static uint32_t Sleep_For_Ms = 20;
+    static size_t s_infected_peek = 0;
     static std::vector<float> s_number_of_infected_people;
     static std::vector<float> s_number_of_fatalities;
     static std::vector<float> s_days;
@@ -46,6 +49,7 @@ namespace kiv_vss::gui
     {
         static size_t counter = 0;
         static size_t days = 0;
+
         while (!s_stop_simulation)
         {
             s_mtx.lock();
@@ -56,14 +60,22 @@ namespace kiv_vss::gui
                 s_number_of_fatalities.push_back(s_simulator->Get_Number_Of_Fatalities());
                 s_number_of_infected_people.push_back(s_simulator->Get_Number_Of_Infected_People());
                 s_days.push_back(days);
+                s_number_of_infections_per_person = s_simulator->Get_Number_Of_Infections_Per_Person();
                 ++days;
             }
             if (s_stop_sim_whe_no_people_infected && 0 == s_simulator->Get_Number_Of_Infected_People())
             {
+                days = 0;
+                counter = 0;
                 break;
             }
             ++counter;
             std::this_thread::sleep_for(std::chrono::milliseconds(Sleep_For_Ms));
+        }
+        if (!s_sim_running)
+        {
+            days = 0;
+            counter = 0;
         }
     }
 
@@ -71,12 +83,28 @@ namespace kiv_vss::gui
     {
         Draw_Simulation();
         Draw_Control_Panel();
-        if (s_stop_simulation)
-        {
-            Draw_Settings_Panel();
-        }
+        Draw_Settings_Panel();
         Draw_Charts();
+        Draw_Statistics();
         // ImGui::ShowDemoWindow();
+    }
+
+    static void Draw_Statistics()
+    {
+        ImGui::Begin("Statistics");
+        size_t currently_infected = 0;
+        size_t diseased_people = 0;
+        if (!s_days.empty())
+        {
+            currently_infected = s_number_of_infected_people.back();
+            s_infected_peek = std::max(s_infected_peek, currently_infected);
+            diseased_people = s_number_of_fatalities.back();
+        }
+        ImGui::Text("Currently infected = %d (%.2f%)", currently_infected, 100.0 * ((double)currently_infected / s_config->Number_Of_People));
+        ImGui::Text("Diseased people = %d (%.2f%)", diseased_people, 100.0 * ((double)diseased_people / s_config->Number_Of_People));
+        ImGui::Text("Infected peek = %d (%.2f%)", s_infected_peek, 100.0 * ((double)s_infected_peek / s_config->Number_Of_People));
+        ImGui::Text("Average number of infections per person = %.2f", s_number_of_infections_per_person);
+        ImGui::End();
     }
 
     static void Draw_Charts()
@@ -106,6 +134,7 @@ namespace kiv_vss::gui
         ImGui::SliderFloat("Disease transmission probability (at home)", &s_config->Disease_Transmission_Probability_At_Home, 0.0f, 1.0f, ".%3f");
         ImGui::SliderFloat("Disease transmission probability (outside)", &s_config->Disease_Transmission_Probability_On_Move, 0.0f, 1.0f, ".%3f");
         ImGui::SliderFloat("Probability of going to self isolate when infected", &s_config->Self_Isolating_When_Infected, 0.0f, 1.0f, ".%3f");
+        ImGui::SliderFloat("Death probability", &s_config->Death_Probability, 0.0f, 1.0f, ".%3f");
         ImGui::Separator();
 
         ImGui::End();
@@ -230,6 +259,8 @@ namespace kiv_vss::gui
             s_number_of_fatalities.clear();
             s_number_of_infected_people.clear();
             s_days.clear();
+            s_infected_peek = 0;
+            s_number_of_infections_per_person = 0;
             s_mtx.unlock();
         }
         ImGui::Checkbox("Stop the simulation there are\nno infected people", &s_stop_sim_whe_no_people_infected);
