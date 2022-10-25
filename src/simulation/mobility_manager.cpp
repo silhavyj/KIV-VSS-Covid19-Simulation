@@ -12,7 +12,6 @@ namespace kiv_vss
           m_popular_locations(popular_locations),
           m_config(Singleton<TConfig>::Get_Instance()),
           m_speed(Generate_Random_Speed()),
-          m_state(NMobility_State::At_Home),
           m_moving(false),
           m_next_location(Pick_Next_Location()),
           m_at_location_counter(Generate_Random_Hours_At_Location()),
@@ -57,7 +56,7 @@ namespace kiv_vss
         return m_person;
     }
 
-    bool CMobility_Manager::Is_Self_Isolating()
+    bool CMobility_Manager::Is_Self_Isolating() const
     {
         return m_self_isolating;
     }

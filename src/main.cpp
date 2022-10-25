@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
 
@@ -7,6 +5,8 @@
 #include "imgui.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
+
+#include "spdlog/spdlog.h"
 
 #include "gui/gui.h"
 
@@ -20,12 +20,12 @@ int main(int argc, char *argv[])
     static_cast<void>(argv);
 
     glfwSetErrorCallback([](int error_code, const char* description) {
-        std::cerr << "GLFW Error " << error_code << ": " << description << std::endl;
+        spdlog::error("GLFW Error {} : {}\n", error_code, description);
     });
 
     if (GLFW_TRUE != glfwInit())
     {
-        std::cerr << "Failed to initialize GLFW" << std::endl;
+        spdlog::error("Failed to initialize GLFW\n");
         return 1;
     }
 
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
     GLFWwindow* window = glfwCreateWindow(Window_Width, Window_Height, Window_Title, nullptr, nullptr);
     if (nullptr == window)
     {
-        std::cerr << "Failed to create a window" << std::endl;
+        spdlog::error("Failed to create a window\n");
         return 1;
     }
     glfwMakeContextCurrent(window);
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
 
     if (GLEW_OK != glewInit())
     {
-        std::cerr << "Failed to initialize glew" << std::endl;
+        spdlog::error("Failed to initialize glew\n");
         return 1;
     }
 
@@ -78,7 +78,55 @@ int main(int argc, char *argv[])
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        static bool dockspace_open = true;
+        static bool opt_fullscreen = true;
+        static bool opt_padding = false;
+        static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+
+        ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+        if (opt_fullscreen)
+        {
+            const ImGuiViewport* viewport = ImGui::GetMainViewport();
+            ImGui::SetNextWindowPos(viewport->WorkPos);
+            ImGui::SetNextWindowSize(viewport->WorkSize);
+            ImGui::SetNextWindowViewport(viewport->ID);
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+            window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+            window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+        }
+        else
+        {
+            dockspace_flags &= ~ImGuiDockNodeFlags_PassthruCentralNode;
+        }
+
+        if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
+        {
+            window_flags |= ImGuiWindowFlags_NoBackground;
+        }
+
+        if (!opt_padding)
+        {
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+        }
+        ImGui::Begin("DockSpace Demo", &dockspace_open, window_flags);
+        if (!opt_padding)
+        {
+            ImGui::PopStyleVar();
+        }
+
+        if (opt_fullscreen)
+        {
+            ImGui::PopStyleVar(2);
+        }
+
+        if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
+        {
+            ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
+            ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+        }
         kiv_vss::gui::Render_GUI();
+        ImGui::End();
 
         ImGui::Render();
         glfwGetFramebufferSize(window, &display_w, &display_h);

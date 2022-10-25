@@ -17,6 +17,11 @@ namespace kiv_vss
         Spread_Virus();
     }
 
+    const std::vector<CPerson>& CSimulator::Get_People() const
+    {
+        return m_people;
+    }
+
     void CSimulator::Generate_Popular_Locations()
     {
         for (size_t i = 0; i < m_config->Number_Of_Popular_Locations; ++i)
@@ -36,27 +41,27 @@ namespace kiv_vss
 
         for (size_t i = 0; i < m_config->Number_Of_People; ++i)
         {
-            m_people[i] = CPerson(Generate_Random_Location());
+            m_people.emplace_back(Generate_Random_Location());
             const bool self_isolating = i < number_of_people_in_self_isolation;
-            m_mobility_managers.emplace_back(&m_people.at(i), self_isolating, &m_popular_locations);
+            m_mobility_managers.emplace_back(&m_people[i], self_isolating, &m_popular_locations);
         }
 
         size_t number_of_infected_people = 0;
         for (size_t i = 0; i < m_config->Number_Of_People; ++i)
         {
-            if (!m_mobility_managers.at(i).Is_Self_Isolating() &&
+            if (!m_mobility_managers[i].Is_Self_Isolating() &&
                 number_of_infected_people < m_config->Number_Of_Initially_Infected_People)
             {
-                m_infection_managers.emplace_back(&m_people.at(i), true);
+                m_infection_managers.emplace_back(&m_people[i], true);
                 m_infected_people_mngs.insert(&m_infection_managers.back());
                 ++number_of_infected_people;
             }
             else
             {
-                m_infection_managers.emplace_back(&m_people.at(i), false);
+                m_infection_managers.emplace_back(&m_people[i], false);
                 m_vulnerable_people_mngs.insert(&m_infection_managers.back());
             }
-            m_mobility_managers_map[&m_people.at(i)] = &m_infection_managers.back();
+            m_mobility_managers_map[&m_people[i]] = &m_infection_managers.back();
         }
     }
 

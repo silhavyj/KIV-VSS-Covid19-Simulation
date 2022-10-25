@@ -14,8 +14,8 @@ namespace kiv_vss
         ~CMobility_Manager() = default;
 
         void Update();
-        CPerson* Get_Person() const;
-        bool Is_Self_Isolating();
+        [[nodiscard]] CPerson* Get_Person() const;
+        [[nodiscard]] bool Is_Self_Isolating() const;
 
     private:
         void Check_Infection_State();
@@ -31,8 +31,7 @@ namespace kiv_vss
         {
             Headed_To_Random_Location,
             Headed_To_Popular_Location,
-            Headed_Home,
-            At_Home
+            Headed_Home
         };
 
     private:
@@ -41,7 +40,6 @@ namespace kiv_vss
         const std::vector<CLocation>* m_popular_locations;
         const TConfig* m_config;
         double m_speed;
-        NMobility_State m_state;
         bool m_moving;
         CLocation m_next_location;
         size_t m_at_location_counter;

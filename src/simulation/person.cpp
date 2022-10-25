@@ -45,12 +45,7 @@ namespace kiv_vss
         return NInfection_State::Immune == m_infection_state;
     }
 
-    CPerson::NInfection_State CPerson::Get_Infection_State() const
-    {
-        return m_infection_state;
-    }
-
-    void CPerson::Set_Infection_State(const NInfection_State infection_state)
+    void CPerson::Set_Infection_State(NInfection_State infection_state)
     {
         m_infection_state = infection_state;
     }

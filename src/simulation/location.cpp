@@ -5,24 +5,11 @@
 
 namespace kiv_vss
 {
-    CLocation::CLocation(const double y, const double x)
+    CLocation::CLocation(double y, double x)
         : m_y(y),
           m_x(x)
     {
 
-    }
-
-    CLocation::CLocation(const CLocation& location)
-        : m_y(location.m_y),
-          m_x(location.m_x)
-    {
-
-    }
-
-    void CLocation::operator=(const CLocation& location)
-    {
-        m_y = location.m_y;
-        m_x = location.m_x;
     }
 
     inline std::pair<double, double> CLocation::Get_Coordinates_Diff(const CLocation& location) const
@@ -62,7 +49,7 @@ namespace kiv_vss
         return { Get_Y(), Get_X() };
     }
 
-    void CLocation::Move_Toward(const CLocation& location, const double distance)
+    void CLocation::Move_Toward(const CLocation& location, double distance)
     {
         if (((*this) - location) < distance)
         {

@@ -19,6 +19,7 @@ namespace kiv_vss
         ~CSimulator() = default;
 
         void Update();
+        const std::vector<CPerson>& Get_People() const;
 
     private:
         void Generate_Popular_Locations();
