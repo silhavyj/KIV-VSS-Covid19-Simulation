@@ -1,3 +1,7 @@
+#include <cassert>
+
+#include "spdlog/spdlog.h"
+
 #include "simulator.h"
 #include "singleton.h"
 #include "utils.h"
@@ -20,6 +24,21 @@ namespace kiv_vss
     const std::vector<CPerson>& CSimulator::Get_People() const
     {
         return m_people;
+    }
+
+    size_t CSimulator::Get_Number_Of_Infected_People() const
+    {
+        return m_infected_people_mngs.size();
+    }
+
+    size_t CSimulator::Get_Number_Of_Fatalities() const
+    {
+        return m_fatalities.size();
+    }
+
+    const std::vector<CLocation>& CSimulator::Get_Popular_Locations() const
+    {
+        return m_popular_locations;
     }
 
     void CSimulator::Generate_Popular_Locations()
@@ -73,15 +92,27 @@ namespace kiv_vss
 
             const auto person = manager.Get_Person();
             auto infection_manager = m_mobility_managers_map[person];
+            infection_manager->Update();
+
+            if (!person->Is_Alive())
+            {
+                m_fatalities.insert(person);
+            }
 
             if (person->Is_Infected() && !m_infected_people_mngs.count(infection_manager))
             {
                 m_infected_people_mngs.insert(infection_manager);
-                m_vulnerable_people_mngs.erase(infection_manager);
+            }
+            if (!person->Is_Infected() && m_infected_people_mngs.count(infection_manager))
+            {
+                m_infected_people_mngs.erase(infection_manager);
             }
             if (person->Is_Vulnerable() && !m_vulnerable_people_mngs.count(infection_manager))
             {
-                m_infected_people_mngs.insert(infection_manager);
+                m_vulnerable_people_mngs.insert(infection_manager);
+            }
+            if (!person->Is_Vulnerable() && m_vulnerable_people_mngs.count(infection_manager))
+            {
                 m_vulnerable_people_mngs.erase(infection_manager);
             }
         }

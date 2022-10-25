@@ -19,6 +19,8 @@ int main(int argc, char *argv[])
     static_cast<void>(argc);
     static_cast<void>(argv);
 
+    spdlog::set_level(spdlog::level::debug);
+
     glfwSetErrorCallback([](int error_code, const char* description) {
         spdlog::error("GLFW Error {} : {}\n", error_code, description);
     });

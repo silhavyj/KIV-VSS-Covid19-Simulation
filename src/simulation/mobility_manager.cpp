@@ -81,20 +81,20 @@ namespace kiv_vss
 
         if (m_self_isolating_due_to_infection)
         {
-            random_events.emplace_back(m_config->Go_To_Popular_Location_Probability_4);
             random_events.emplace_back(m_config->Go_To_Random_Location_Probability_4);
+            random_events.emplace_back(m_config->Go_To_Popular_Location_Probability_4);
             random_events.emplace_back(m_config->Go_Home_Probability_4);
         }
         else if (m_self_isolating)
         {
-            random_events.emplace_back(m_config->Go_To_Popular_Location_Probability_3);
             random_events.emplace_back(m_config->Go_To_Random_Location_Probability_3);
+            random_events.emplace_back(m_config->Go_To_Popular_Location_Probability_3);
             random_events.emplace_back(m_config->Go_Home_Probability_3);
         }
         else if (m_person->Is_Home())
         {
-            random_events.emplace_back(m_config->Go_To_Popular_Location_Probability_2);
             random_events.emplace_back(m_config->Go_To_Random_Location_Probability_2);
+            random_events.emplace_back(m_config->Go_To_Popular_Location_Probability_2);
         }
         else
         {

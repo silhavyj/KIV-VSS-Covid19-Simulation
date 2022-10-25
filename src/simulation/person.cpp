@@ -49,4 +49,9 @@ namespace kiv_vss
     {
         m_infection_state = infection_state;
     }
+
+    CPerson::NInfection_State CPerson::Get_Infection_State() const
+    {
+        return m_infection_state;
+    }
 }

@@ -29,6 +29,7 @@ namespace kiv_vss
         [[nodiscard]] bool Is_Immune() const;
 
         void Set_Infection_State(NInfection_State infection_state);
+        [[nodiscard]] NInfection_State Get_Infection_State() const;
 
     private:
         CLocation m_home;

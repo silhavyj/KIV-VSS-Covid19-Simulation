@@ -1,3 +1,5 @@
+#include "spdlog/spdlog.h"
+
 #include "utils.h"
 #include "singleton.h"
 #include "infection_manager.h"
@@ -25,7 +27,7 @@ namespace kiv_vss
 
     CPerson* CInfection_Manger::Get_Person() const
     {
-        return m_person;
+         return m_person;
     }
 
     void CInfection_Manger::Update()

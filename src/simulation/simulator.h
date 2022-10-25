@@ -19,7 +19,10 @@ namespace kiv_vss
         ~CSimulator() = default;
 
         void Update();
-        const std::vector<CPerson>& Get_People() const;
+        [[nodiscard]] const std::vector<CPerson>& Get_People() const;
+        [[nodiscard]] const std::vector<CLocation>& Get_Popular_Locations() const;
+        [[nodiscard]] size_t Get_Number_Of_Infected_People() const;
+        [[nodiscard]] size_t Get_Number_Of_Fatalities() const;
 
     private:
         void Generate_Popular_Locations();
@@ -40,5 +43,6 @@ namespace kiv_vss
         std::unordered_set<CInfection_Manger*> m_infected_people_mngs;
         std::unordered_set<CInfection_Manger*> m_vulnerable_people_mngs;
         std::unordered_map<CPerson*, CInfection_Manger*> m_mobility_managers_map;
+        std::unordered_set<CPerson*> m_fatalities;
     };
 }
