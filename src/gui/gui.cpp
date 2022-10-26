@@ -33,6 +33,8 @@ namespace kiv_vss::gui
     static size_t s_infected_peek = 0;
     static std::vector<float> s_number_of_infected_people;
     static std::vector<float> s_number_of_fatalities;
+    static std::vector<float> s_number_of_immune_people;
+    static std::vector<float> s_number_of_vulnerable_people;
     static std::vector<float> s_days;
 
     static ImVec4 s_vulnerable_color = ImVec4(0.5f, 0.5f, 0.5f, 0.5f);
@@ -59,6 +61,8 @@ namespace kiv_vss::gui
             {
                 s_number_of_fatalities.push_back(s_simulator->Get_Number_Of_Fatalities());
                 s_number_of_infected_people.push_back(s_simulator->Get_Number_Of_Infected_People());
+                s_number_of_immune_people.push_back(s_simulator->Get_Number_Of_Immune_People());
+                s_number_of_vulnerable_people.push_back(s_simulator->Get_Number_Of_Vulnerable_People());
                 s_days.push_back(days);
                 s_number_of_infections_per_person = s_simulator->Get_Number_Of_Infections_Per_Person();
                 ++days;
@@ -86,7 +90,7 @@ namespace kiv_vss::gui
         Draw_Settings_Panel();
         Draw_Charts();
         Draw_Statistics();
-        // ImGui::ShowDemoWindow();
+        //ImGui::ShowDemoWindow();
     }
 
     static void Draw_Statistics()
@@ -114,6 +118,8 @@ namespace kiv_vss::gui
         {
             ImPlot::PlotLine("Number of infected people", s_days.data(), s_number_of_infected_people.data(), s_days.size());
             ImPlot::PlotLine("Number of fatalities", s_days.data(), s_number_of_fatalities.data(), s_days.size());
+            //ImPlot::PlotLine("Number of vulnerable people", s_days.data(), s_number_of_vulnerable_people.data(), s_days.size());
+            //ImPlot::PlotLine("Number of immune people", s_days.data(), s_number_of_immune_people.data(), s_days.size());
             ImPlot::EndPlot();
         }
         ImGui::End();
@@ -135,6 +141,9 @@ namespace kiv_vss::gui
         ImGui::SliderFloat("Disease transmission probability (outside)", &s_config->Disease_Transmission_Probability_On_Move, 0.0f, 1.0f, ".%3f");
         ImGui::SliderFloat("Probability of going to self isolate when infected", &s_config->Self_Isolating_When_Infected, 0.0f, 1.0f, ".%3f");
         ImGui::SliderFloat("Death probability", &s_config->Death_Probability, 0.0f, 1.0f, ".%3f");
+        ImGui::Separator();
+        ImGui::SliderInt("Average infection period", reinterpret_cast<int *>(&s_config->Average_Infection_Period), 24, 960);
+        ImGui::SliderInt("Average immunity period", reinterpret_cast<int *>(&s_config->Average_Immunity_Period), 24, 2160);
         ImGui::Separator();
 
         ImGui::End();

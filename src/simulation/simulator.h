@@ -23,6 +23,8 @@ namespace kiv_vss
         [[nodiscard]] const std::vector<CLocation>& Get_Popular_Locations() const;
         [[nodiscard]] size_t Get_Number_Of_Infected_People() const;
         [[nodiscard]] size_t Get_Number_Of_Fatalities() const;
+        [[nodiscard]] size_t Get_Number_Of_Immune_People() const;
+        [[nodiscard]] size_t Get_Number_Of_Vulnerable_People() const;
         [[nodiscard]] double Get_Number_Of_Infections_Per_Person() const;
 
     private:
@@ -46,5 +48,7 @@ namespace kiv_vss
         std::unordered_map<CPerson*, CInfection_Manger*> m_mobility_managers_map;
         std::unordered_set<CPerson*> m_fatalities;
         double m_number_of_infections_per_person;
+        size_t m_number_of_vulnerable_people;
+        size_t m_number_of_immune_people;
     };
 }

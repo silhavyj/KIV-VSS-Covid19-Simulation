@@ -1,6 +1,6 @@
 #pragma once
 
-#include <stddef.h>
+#include <cstddef>
 
 namespace kiv_vss
 {
@@ -38,10 +38,6 @@ namespace kiv_vss
         double Go_To_Popular_Location_Probability_3 = 0.12;
         double Go_To_Random_Location_Probability_3 = 0.12;
         double Go_Home_Probability_3 = 0.76;
-
-        /*double Go_To_Popular_Location_Probability_4 = 0.002;
-        double Go_To_Random_Location_Probability_4 = 0.002;
-        double Go_Home_Probability_4 = 0.996;*/
 
         double Go_To_Popular_Location_Probability_4 = 0.2;
         double Go_To_Random_Location_Probability_4 = 0.04;

@@ -1,5 +1,3 @@
-#include <cassert>
-
 #include "spdlog/spdlog.h"
 
 #include "simulator.h"
@@ -9,7 +7,8 @@
 namespace kiv_vss
 {
     CSimulator::CSimulator()
-        : m_config(Singleton<TConfig>::Get_Instance())
+        : m_config(Singleton<TConfig>::Get_Instance()),
+          m_number_of_infections_per_person(0.0)
     {
         Generate_Popular_Locations();
         Generate_People();
@@ -34,6 +33,16 @@ namespace kiv_vss
     size_t CSimulator::Get_Number_Of_Fatalities() const
     {
         return m_fatalities.size();
+    }
+
+    size_t CSimulator::Get_Number_Of_Immune_People() const
+    {
+        return m_number_of_immune_people;
+    }
+
+    size_t CSimulator::Get_Number_Of_Vulnerable_People() const
+    {
+        return m_number_of_vulnerable_people;
     }
 
     const std::vector<CLocation>& CSimulator::Get_Popular_Locations() const
@@ -92,6 +101,9 @@ namespace kiv_vss
     void CSimulator::Move_People_Around()
     {
         m_number_of_infections_per_person = 0;
+        size_t number_of_immune_people = 0;
+        size_t number_of_vulnerable_people = 0;
+
         for (auto& manager : m_mobility_managers)
         {
             manager.Update();
@@ -104,7 +116,15 @@ namespace kiv_vss
             {
                 m_fatalities.insert(person);
             }
-            m_number_of_infections_per_person += infection_manager->Get_Infection_Count();
+            if (person->Is_Vulnerable())
+            {
+                ++number_of_vulnerable_people;
+            }
+            if (person->Is_Immune())
+            {
+                ++number_of_immune_people;
+            }
+            m_number_of_infections_per_person += static_cast<double>(infection_manager->Get_Infection_Count());
 
             if (person->Is_Infected() && !m_infected_people_mngs.count(infection_manager))
             {
@@ -123,7 +143,10 @@ namespace kiv_vss
                 m_vulnerable_people_mngs.erase(infection_manager);
             }
         }
+
         m_number_of_infections_per_person /= m_people.size();
+        m_number_of_immune_people = number_of_immune_people;
+        m_number_of_vulnerable_people = number_of_vulnerable_people;
     }
 
     void CSimulator::Spread_Virus()

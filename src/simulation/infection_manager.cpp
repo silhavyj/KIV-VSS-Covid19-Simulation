@@ -1,5 +1,3 @@
-#include "spdlog/spdlog.h"
-
 #include "utils.h"
 #include "singleton.h"
 #include "infection_manager.h"
