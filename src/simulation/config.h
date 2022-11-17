@@ -35,12 +35,12 @@ namespace kiv_vss
         double Go_To_Popular_Location_Probability_2 = 0.80;
         double Go_To_Random_Location_Probability_2 = 0.20;
 
-        double Go_To_Popular_Location_Probability_3 = 0.12;
-        double Go_To_Random_Location_Probability_3 = 0.12;
-        double Go_Home_Probability_3 = 0.76;
+        double Go_To_Popular_Location_Probability_3 = 0.001;
+        double Go_To_Random_Location_Probability_3 = 0.001;
+        double Go_Home_Probability_3 = 0.998;
 
-        double Go_To_Popular_Location_Probability_4 = 0.2;
-        double Go_To_Random_Location_Probability_4 = 0.04;
-        double Go_Home_Probability_4 = 0.76;
+        double Go_To_Popular_Location_Probability_4 = 0.001;
+        double Go_To_Random_Location_Probability_4 = 0.001;
+        double Go_Home_Probability_4 = 0.998;
     };
 }
