@@ -49,11 +49,6 @@ namespace kiv_vss
         }
     }
 
-    const CPerson* CMobility_Model::Get_Person() const
-    {
-        return m_person;
-    }
-
     void CMobility_Model::Check_Infection_State()
     {
         static bool seen_infected = false;
@@ -66,7 +61,7 @@ namespace kiv_vss
         }
         if (seen_infected && !person_is_infected)
         {
-            m_self_isolating = false;
+            seen_infected = false;
             m_self_isolating_due_to_infection = false;
         }
     }

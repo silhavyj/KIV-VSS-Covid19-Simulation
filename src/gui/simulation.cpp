@@ -31,7 +31,7 @@ namespace kiv_vss::gui
             if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
             {
                 const auto [x, y] = ImGui::GetCursorScreenPos();
-                spdlog::info("[{}, {}]", y, x);
+                //spdlog::info("[{}, {}]", y, x);
             }
         }
 

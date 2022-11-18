@@ -14,7 +14,6 @@ namespace kiv_vss
         ~CMobility_Model() = default;
 
         void Update();
-        [[nodiscard]] const CPerson* Get_Person() const;
 
     private:
         void Check_Infection_State();

@@ -6,11 +6,11 @@ namespace kiv_vss
 {
     struct TDisease
     {
-        double transmission_distance{5};
+        double transmission_distance{1};
         double transmission_prob_on_move{0.65};
         double transmission_prob_at_home{0.5};
         double death_prob{0.15};
-        double self_isolating_when_infected{0.4};
+        double self_isolating_when_infected{0.6};
         std::size_t average_infection_period{24 * 14};
         std::size_t average_immunity_period{24 * 60};
     };

@@ -33,6 +33,12 @@ namespace kiv_vss
 
     void CSimulation::Generate_Population()
     {
+        // TODO temporary (delete)
+        for (std::size_t i = 0; i < 3; ++i)
+        {
+            m_popular_locations.emplace_back(CLocation::Generate_Random_In_Square_Location(0.25 * m_config->layout.world_size, 0.75 * m_config->layout.world_size));
+        }
+
         const auto number_of_people_in_self_isolation = static_cast<std::size_t>(
             static_cast<double>(m_config->layout.number_of_people) * m_config->layout.ratio_of_people_in_self_isolation
         );
@@ -55,6 +61,10 @@ namespace kiv_vss
     void CSimulation::Move_People_Around()
     {
         for (auto& manager : m_mobility_managers)
+        {
+            manager.Update();
+        }
+        for (auto& manager : m_infection_managers)
         {
             manager.Update();
         }
@@ -89,11 +99,15 @@ namespace kiv_vss
         const auto person1 = infected_person_manager.Get_Person();
         const auto person2 = vulnerable_person_manager.Get_Person();
 
-        if (!((person1->Get_Infection_State() == CPerson::NInfection_State::Susceptible)) ^
-              (person2->Get_Infection_State() == CPerson::NInfection_State::Infected))
+        const auto person1_state = person1->Get_Infection_State();
+        const auto person2_state = person2->Get_Infection_State();
+
+        if (!((person1_state == CPerson::NInfection_State::Susceptible && person2_state == CPerson::NInfection_State::Infected) ||
+              (person2_state == CPerson::NInfection_State::Susceptible && person1_state == CPerson::NInfection_State::Infected)))
         {
             return false;
         }
+
         if ((person1->Get_Current_Location() - person2->Get_Current_Location()) > m_config->disease.transmission_distance)
         {
             return false;
