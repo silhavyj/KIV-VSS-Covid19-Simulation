@@ -17,9 +17,9 @@ namespace kiv_vss::gui
         const auto& statistics = m_simulation->Get_Statistics();
 
         static bool s_display_number_of_infected_people{true};
-        static bool s_display_number_of_fatalities{true};
-        static bool s_display_number_of_immune_people{true};
-        static bool s_display_number_of_susceptible_people{true};
+        static bool s_display_number_of_fatalities{false};
+        static bool s_display_number_of_immune_people{false};
+        static bool s_display_number_of_susceptible_people{false};
 
         ImGui::Checkbox("Number of infected people", &s_display_number_of_infected_people);
         ImGui::SameLine();

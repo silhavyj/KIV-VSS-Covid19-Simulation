@@ -1,3 +1,5 @@
+#include <cmath>
+
 #include "spdlog/spdlog.h"
 
 #include "utils.h"
@@ -10,7 +12,8 @@ namespace kiv_vss
         : m_config{Singleton<TConfig>::Get_Instance()},
           m_statistics{},
           m_time{0},
-          m_system_saturated{false}
+          m_system_saturated{false},
+          m_max_number_of_infected_people{0}
     {
         Generate_Population();
     }
@@ -40,6 +43,17 @@ namespace kiv_vss
     const std::vector<CPerson>& CSimulation::Get_People() const
     {
         return m_people;
+    }
+
+    bool CSimulation::Is_Simulation_Over() const
+    {
+        return !m_statistics.number_of_infected_people.empty() &&
+               0 == m_statistics.number_of_infected_people.back();
+    }
+
+    std::size_t CSimulation::Get_Maximum_Number_Of_Infected_People() const
+    {
+        return m_max_number_of_infected_people;
     }
 
     const std::vector<CLocation>& CSimulation::Get_Popular_Locations() const
@@ -114,10 +128,10 @@ namespace kiv_vss
         if (m_time % 24 == 0)
         {
             Update_Statistics(record);
+            m_max_number_of_infected_people = std::max(m_max_number_of_infected_people, static_cast<std::size_t>(record.number_of_infected_people));
+            float infected_percentage = record.number_of_infected_people / m_config->general.number_of_people;
+            m_system_saturated = infected_percentage > m_config->general.saturation_level;
         }
-
-        float infected_percentage = record.number_of_infected_people / m_config->general.number_of_people;
-        m_system_saturated = infected_percentage > m_config->general.saturation_level;
     }
 
     inline void CSimulation::Update_Statistics(const TStatistics_Record& record)

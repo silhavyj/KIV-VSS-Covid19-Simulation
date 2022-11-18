@@ -14,5 +14,6 @@ namespace kiv_vss::gui
 
     private:
         double Get_Number_Of_People_Percentage(const std::vector<float>& data) const;
+        double Get_Percentage_People(double value) const;
     };
 }

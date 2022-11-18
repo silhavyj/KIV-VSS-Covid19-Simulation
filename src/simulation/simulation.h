@@ -41,6 +41,8 @@ namespace kiv_vss
         [[nodiscard]] const std::vector<CPerson>& Get_People() const;
         [[nodiscard]] const std::vector<CLocation>& Get_Popular_Locations() const;
         [[nodiscard]] bool Is_System_Saturated() const;
+        [[nodiscard]] bool Is_Simulation_Over() const;
+        [[nodiscard]] std::size_t Get_Maximum_Number_Of_Infected_People() const;
 
     private:
         void Update_Statistics(const TStatistics_Record& record);
@@ -59,5 +61,6 @@ namespace kiv_vss
         TStatistics m_statistics;
         std::size_t m_time;
         bool m_system_saturated;
+        std::size_t m_max_number_of_infected_people;
     };
 }

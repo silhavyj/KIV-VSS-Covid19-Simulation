@@ -10,6 +10,8 @@ namespace kiv_vss::gui
 {
     static CSimulation* s_simulation = new CSimulation;
     static bool s_play{false};
+    static bool s_stop_simulation_when_nobody_infected{true};
+    static bool s_simulation_over{false};
 
     static CSettings_Window s_settings_window(s_simulation);
     static CSimulation_Window s_simulation_window(s_simulation);
@@ -35,27 +37,36 @@ namespace kiv_vss::gui
 
     inline static void Update_Simulation()
     {
-        if (s_play)
+        if (s_play && !(s_stop_simulation_when_nobody_infected && s_simulation_over))
         {
             s_simulation->Update();
+            s_simulation_over = s_simulation->Is_Simulation_Over();
         }
     }
 
     inline static void Render_Control_Window()
     {
         ImGui::Begin("Control");
-        if (ImGui::Button("Reset"))
-        {
-            delete s_simulation;
-            s_simulation = new CSimulation;
-            s_play = false;
-            std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) { window->Set_Simulation(s_simulation); });
-        }
 
         if (ImGui::Button("Play / Pause"))
         {
             s_play = !s_play;
         }
+
+        ImGui::SameLine();
+
+        if (ImGui::Button("Reset"))
+        {
+            delete s_simulation;
+            s_simulation = new CSimulation;
+            std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) { window->Set_Simulation(s_simulation); });
+
+            s_play = false;
+            s_simulation_over = false;
+        }
+
+        ImGui::Checkbox("Stop the simulation if there are\nno infected people", &s_stop_simulation_when_nobody_infected);
+
         ImGui::End();
     }
 }
