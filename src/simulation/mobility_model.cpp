@@ -120,12 +120,12 @@ namespace kiv_vss
         {
             return CLocation::Generate_Random_In_Square_Location(0, m_config->layout.world_size);
         }
-        const size_t index = utils::Random<std::uniform_int_distribution<size_t>>(0, m_popular_places->size() - 1);
+        const std::size_t index = utils::Random<std::uniform_int_distribution<std::size_t>>(0, m_popular_places->size() - 1);
         return m_popular_places->at(index);
     }
 
     inline std::size_t CMobility_Model::Generate_Random_Hours_At_Location() const
     {
-        return utils::Random<std::uniform_int_distribution<size_t>>(0, m_config->mobility.max_hours_spent_at_location);
+        return utils::Random<std::uniform_int_distribution<std::size_t>>(0, m_config->mobility.max_hours_spent_at_location);
     }
 }

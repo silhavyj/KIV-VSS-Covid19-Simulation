@@ -74,7 +74,7 @@ namespace kiv_vss::gui
         switch (state)
         {
             case CPerson::NInfection_State::Immune:
-                return ImVec4(0.0f, 0.0f, 1.0f, 0.5f);
+                return ImVec4(0.0f, 0.8f, 1.0f, 0.5f);
 
             case CPerson::NInfection_State::Infected:
                 return ImVec4(0.0f, 1.0f, 0.0f, 0.5f);
