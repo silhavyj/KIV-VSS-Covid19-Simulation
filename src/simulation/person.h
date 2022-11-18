@@ -1,5 +1,6 @@
 #pragma once
 
+#include "config.h"
 #include "location.h"
 
 namespace kiv_vss
@@ -7,33 +8,34 @@ namespace kiv_vss
     class CPerson
     {
     public:
-        enum class NInfection_State : uint8_t
+        enum class NInfection_State : std::uint8_t
         {
-            Vulnerable,
+            Susceptible,
             Infected,
             Immune,
             Dead
         };
 
     public:
-        explicit CPerson(const CLocation& location);
+        explicit CPerson(const CLocation& home);
         ~CPerson() = default;
 
-        [[nodiscard]] CLocation& Get_Current_Location();
+
+        [[nodiscard]] const CLocation& Get_Current_Location() const;
         [[nodiscard]] const CLocation& Get_Home_Location() const;
         [[nodiscard]] bool Is_Home() const;
-
-        [[nodiscard]] bool Is_Alive() const;
-        [[nodiscard]] bool Is_Infected() const;
-        [[nodiscard]] bool Is_Vulnerable() const;
-        [[nodiscard]] bool Is_Immune() const;
-
         void Set_Infection_State(NInfection_State infection_state);
         [[nodiscard]] NInfection_State Get_Infection_State() const;
+        void Move_Toward(const CLocation& location);
 
     private:
-        CLocation m_home;
+        [[nodiscard]] double Generate_Random_Speed() const;
+
+    private:
+        CLocation m_home_location;
         CLocation m_current_location;
         NInfection_State m_infection_state;
+        const TConfig* m_config;
+        double m_speed;
     };
 }

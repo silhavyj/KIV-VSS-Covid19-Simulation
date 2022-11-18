@@ -11,21 +11,21 @@ namespace kiv_vss
     public:
         static T* Get_Instance()
         {
-            std::call_once(m_init_flag, [=]() {
-                Singleton<T>::m_instance = std::make_unique<T>();
+            std::call_once(s_init_flag, [=]() {
+                Singleton<T>::s_instance = std::make_unique<T>();
             });
 
-            return m_instance.get();
+            return s_instance.get();
         }
 
     private:
-        static std::unique_ptr<T> m_instance;
-        static std::once_flag m_init_flag;
+        static std::unique_ptr<T> s_instance;
+        static std::once_flag s_init_flag;
     };
 
     template<typename T>
-    std::unique_ptr<T> Singleton<T>::m_instance = nullptr;
+    std::unique_ptr<T> Singleton<T>::s_instance = nullptr;
 
     template<typename T>
-    std::once_flag Singleton<T>::m_init_flag = {};
+    std::once_flag Singleton<T>::s_init_flag = {};
 }
