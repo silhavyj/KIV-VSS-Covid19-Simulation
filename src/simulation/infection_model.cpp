@@ -4,11 +4,12 @@
 
 namespace kiv_vss
 {
-    CInfection_Model::CInfection_Model(CPerson* person, bool initially_infected)
+    CInfection_Model::CInfection_Model(CPerson* person, bool* system_saturated, bool initially_infected)
         : m_person{person},
           m_config{Singleton<TConfig>::Get_Instance()},
           m_infection_counter{0},
-          m_counter{0}
+          m_counter{0},
+          m_system_saturated{system_saturated}
     {
         if (initially_infected)
         {
@@ -39,7 +40,7 @@ namespace kiv_vss
                     break;
 
                 case CPerson::NInfection_State::Infected:
-                    if (utils::Try_Event(m_config->disease.death_prob))
+                    if (utils::Try_Event(*m_system_saturated ? m_config->disease.death_saturated_prob : m_config->disease.death_prob))
                     {
                         m_person->Set_Infection_State(CPerson::NInfection_State::Dead);
                     }

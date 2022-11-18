@@ -10,17 +10,19 @@ namespace kiv_vss
         double transmission_prob_on_move{0.65};
         double transmission_prob_at_home{0.5};
         double death_prob{0.15};
-        double self_isolating_when_infected{0.6};
+        double death_saturated_prob{0.3};
+        double self_isolating_when_infected{0.1};
         std::size_t average_infection_period{24 * 14};
         std::size_t average_immunity_period{24 * 60};
     };
 
-    struct TLayout
+    struct TGeneral
     {
         double world_size{5000};
-        double ratio_of_people_in_self_isolation{0.5};
+        double ratio_of_people_in_self_isolation{0.1};
         std::size_t number_of_people{1000};
         std::size_t number_of_initially_infected_people{5};
+        double saturation_level{0.2};
     };
 
     struct TMobility
@@ -42,7 +44,7 @@ namespace kiv_vss
 
     struct TConfig
     {
-        TLayout layout;
+        TGeneral general;
         TDisease disease;
         TMobility mobility;
     };

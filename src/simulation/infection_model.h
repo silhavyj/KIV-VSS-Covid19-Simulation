@@ -8,7 +8,7 @@ namespace kiv_vss
     class CInfection_Model
     {
     public:
-        explicit CInfection_Model(CPerson* person, bool initially_infected = false);
+        explicit CInfection_Model(CPerson* person, bool* system_saturated, bool initially_infected = false);
         ~CInfection_Model() = default;
 
         void Infect();
@@ -25,5 +25,6 @@ namespace kiv_vss
         const TConfig* m_config;
         std::size_t m_infection_counter;
         std::size_t m_counter;
+        const bool* m_system_saturated;
     };
 }

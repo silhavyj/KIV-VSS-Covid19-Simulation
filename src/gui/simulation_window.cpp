@@ -1,20 +1,13 @@
 #include "spdlog/spdlog.h"
 
-#include "../simulation/singleton.h"
-#include "simulation.h"
+#include "simulation_window.h"
 
 namespace kiv_vss::gui
 {
     CSimulation_Window::CSimulation_Window(const CSimulation* simulation)
-        : m_simulation{simulation},
-          m_config{Singleton<TConfig>::Get_Instance()}
+        : GUI_Window(simulation)
     {
 
-    }
-
-    void CSimulation_Window::Set_Simulation(const CSimulation* simulation)
-    {
-        m_simulation = simulation;
     }
 
     void CSimulation_Window::Render()
@@ -43,8 +36,8 @@ namespace kiv_vss::gui
         const auto [y, x] = person.Get_Current_Location().Get_Coordinates();
         auto [v_min, v_max ] = Get_Windows_Boundaries();
 
-        v_min.y += (((v_max.y - v_min.y) * y) / m_config->layout.world_size) - Person_Circle_Size / 2.0;
-        v_min.x += (((v_max.x - v_min.x) * x) / m_config->layout.world_size) - Person_Circle_Size / 2.0;
+        v_min.y += (((v_max.y - v_min.y) * y) / m_config->general.world_size) - Person_Circle_Size / 2.0;
+        v_min.x += (((v_max.x - v_min.x) * x) / m_config->general.world_size) - Person_Circle_Size / 2.0;
 
         const auto person_color = ImGui::GetColorU32(Get_Person_Color(person));
         draw_list->AddCircleFilled(v_min, Person_Circle_Size, person_color);

@@ -95,7 +95,7 @@ namespace kiv_vss
         switch (action)
         {
             case NMobility_State::Headed_To_Random_Location:
-                next_location = CLocation::Generate_Random_In_Square_Location(0, m_config->layout.world_size);
+                next_location = CLocation::Generate_Random_In_Square_Location(0, m_config->general.world_size);
                 break;
 
             case NMobility_State::Headed_To_Popular_Place:
@@ -118,7 +118,7 @@ namespace kiv_vss
     {
         if (m_popular_places->empty())
         {
-            return CLocation::Generate_Random_In_Square_Location(0, m_config->layout.world_size);
+            return CLocation::Generate_Random_In_Square_Location(0, m_config->general.world_size);
         }
         const std::size_t index = utils::Random<std::uniform_int_distribution<std::size_t>>(0, m_popular_places->size() - 1);
         return m_popular_places->at(index);
