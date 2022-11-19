@@ -69,11 +69,11 @@ namespace kiv_vss
 
     inline std::size_t CInfection_Model::Generate_Random_Infection_Period() const
     {
-        return utils::Random<std::poisson_distribution<std::size_t>>(m_config->disease.average_infection_period);
+        return utils::Random<std::poisson_distribution<std::size_t>>(m_config->disease.Get_Average_Infection_Period());
     }
 
     inline std::size_t CInfection_Model::Generate_Random_Immunity_Period() const
     {
-        return utils::Random<std::poisson_distribution<std::size_t>>(m_config->disease.average_immunity_period);
+        return utils::Random<std::poisson_distribution<std::size_t>>(m_config->disease.Get_Average_Immunity_Period());
     }
 }

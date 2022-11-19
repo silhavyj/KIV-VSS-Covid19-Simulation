@@ -22,15 +22,24 @@ namespace kiv_vss
         float death_saturated_prob{0.3};
         float self_isolating_when_infected{0.1};
 
-        // TODO convert from days
-        std::size_t average_infection_period{24 * 14};
-        std::size_t average_immunity_period{24 * 60};
+        std::size_t average_infection_period{14};
+        std::size_t average_immunity_period{60};
+
+        inline std::size_t Get_Average_Infection_Period() const
+        {
+            return 24 * average_infection_period;
+        }
+
+        inline std::size_t Get_Average_Immunity_Period() const
+        {
+            return 24 * average_immunity_period;
+        }
     };
 
     struct TMobility
     {
-        double average_person_speed = 10;
-        double variance_person_speed = 1;
+        float average_person_speed = 10;
+        float variance_person_speed = 1;
         std::size_t max_hours_spent_at_location = 8;
 
         struct TTransition

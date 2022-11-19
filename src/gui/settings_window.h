@@ -15,5 +15,6 @@ namespace kiv_vss::gui
     private:
         void Render_General_Settings() const;
         void Render_Disease_Settings() const;
+        void Render_Mobility_Settings() const;
     };
 }
