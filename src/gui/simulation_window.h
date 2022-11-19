@@ -7,7 +7,7 @@ namespace kiv_vss::gui
     class CSimulation_Window : public GUI_Window
     {
     public:
-        explicit CSimulation_Window(CSimulation* simulation);
+        explicit CSimulation_Window(CSimulation* simulation, bool* display_popular_locations);
         ~CSimulation_Window() = default;
 
         void Render() override;
@@ -23,5 +23,8 @@ namespace kiv_vss::gui
         [[nodiscard]] static std::pair<ImVec2, ImVec2> Get_Windows_Boundaries();
         [[nodiscard]] ImVec4 Get_Person_Color(const CPerson& person);
         void Add_Popular_Location();
+
+    private:
+        const bool* m_display_popular_locations;
     };
 }

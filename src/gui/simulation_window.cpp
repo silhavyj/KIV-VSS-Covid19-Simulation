@@ -4,8 +4,9 @@
 
 namespace kiv_vss::gui
 {
-    CSimulation_Window::CSimulation_Window(CSimulation* simulation)
-        : GUI_Window(simulation)
+    CSimulation_Window::CSimulation_Window(CSimulation* simulation, bool* display_popular_locations)
+        : GUI_Window(simulation),
+          m_display_popular_locations{display_popular_locations}
     {
 
     }
@@ -22,9 +23,12 @@ namespace kiv_vss::gui
             ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
             std::for_each(people.begin(), people.end(), [&](auto person) { Draw_Person(person, draw_list); });
-            std::for_each(popular_locations.begin(), popular_locations.end(), [&](auto location) { Draw_Popular_Location(location, draw_list); });
+            if (*m_display_popular_locations)
+            {
+                std::for_each(popular_locations.begin(), popular_locations.end(), [&](auto location) { Draw_Popular_Location(location, draw_list); });
+            }
 
-            if (ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+            if (ImGui::IsWindowFocused() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
             {
                 Add_Popular_Location();
             }

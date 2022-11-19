@@ -15,9 +15,10 @@ namespace kiv_vss::gui
     static bool s_play{false};
     static bool s_stop_simulation_when_nobody_infected{true};
     static bool s_simulation_over{false};
+    static bool s_display_popular_locations{true};
 
     static CSettings_Window s_settings_window(s_simulation);
-    static CSimulation_Window s_simulation_window(s_simulation);
+    static CSimulation_Window s_simulation_window(s_simulation, &s_display_popular_locations);
     static CPlots_Window s_plots_window(s_simulation);
     static CStatistics_Window s_statistics_window(s_simulation);
 
@@ -73,6 +74,7 @@ namespace kiv_vss::gui
         }
 
         ImGui::Checkbox("Stop the simulation if there are\nno infected people", &s_stop_simulation_when_nobody_infected);
+        ImGui::Checkbox("Display popular locations", &s_display_popular_locations);
 
         ImGui::End();
     }
