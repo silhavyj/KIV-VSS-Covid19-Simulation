@@ -70,6 +70,8 @@ namespace kiv_vss::gui
                     statistics.time.size()
                 );
             }
+
+            ImPlot::EndPlot();
         }
 
         ImGui::End();

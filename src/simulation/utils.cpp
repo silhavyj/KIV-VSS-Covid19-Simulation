@@ -21,7 +21,7 @@ namespace kiv_vss::utils
         static constexpr double EPSILON = 0.0001;
         if (std::abs(probabilities.back() - 1.0) > EPSILON)
         {
-            spdlog::error("ERROR: Sum of all probabilities must add up to 1.0. Returning 0 as the default value.");
+            spdlog::error("ERROR: Sum of all probabilities must add up to 1.0, not {}. Returning 0 as the default value.", probabilities.back());
             return 0;
         }
 
