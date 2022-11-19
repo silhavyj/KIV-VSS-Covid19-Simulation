@@ -25,12 +25,12 @@ namespace kiv_vss
         std::size_t average_infection_period{14};
         std::size_t average_immunity_period{60};
 
-        inline std::size_t Get_Average_Infection_Period() const
+        [[nodiscard]] inline std::size_t Get_Average_Infection_Period() const
         {
             return 24 * average_infection_period;
         }
 
-        inline std::size_t Get_Average_Immunity_Period() const
+        [[nodiscard]] inline std::size_t Get_Average_Immunity_Period() const
         {
             return 24 * average_immunity_period;
         }
