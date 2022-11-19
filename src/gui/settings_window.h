@@ -11,5 +11,9 @@ namespace kiv_vss::gui
         ~CSettings_Window() = default;
 
         void Render() override;
+
+    private:
+        void Render_General_Settings() const;
+        void Render_Disease_Settings() const;
     };
 }

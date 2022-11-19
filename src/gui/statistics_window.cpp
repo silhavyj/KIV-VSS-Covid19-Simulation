@@ -14,15 +14,19 @@ namespace kiv_vss::gui
 
         const auto& statistics = m_simulation->Get_Statistics();
 
+        ImGui::Text("System saturated = %s", m_simulation->Is_System_Saturated() ? "YES\0" : "NO\0");
+
+        ImGui::Separator();
+
         ImGui::Text("Currently infected people [%] = %.2f", Get_Number_Of_People_Percentage(statistics.number_of_infected_people));
         ImGui::Text("Currently immune people [%] = %.2f", Get_Number_Of_People_Percentage(statistics.number_of_immune_people));
         ImGui::Text("Currently susceptible people [%] = %.2f", Get_Number_Of_People_Percentage(statistics.number_of_susceptible_people));
-        ImGui::Text("System saturated = %s", m_simulation->Is_System_Saturated() ? "YES\0" : "NO\0");
 
         ImGui::Separator();
 
         ImGui::Text("Total fatality rate [%] = %.2f", Get_Number_Of_People_Percentage(statistics.number_of_fatalities));
         ImGui::Text("Infected people (peek) [%] = %.2f", Get_Percentage_People(m_simulation->Get_Maximum_Number_Of_Infected_People()));
+        ImGui::Text("Number of contractions per person = %.2f", statistics.time.empty() ? 0.0 : statistics.number_of_contractions_per_person.back());
 
         ImGui::End();
     }

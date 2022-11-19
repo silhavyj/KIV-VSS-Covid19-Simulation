@@ -27,7 +27,7 @@ namespace kiv_vss
             std::vector<float> number_of_infected_people;
             std::vector<float> number_of_immune_people;
             std::vector<float> number_of_susceptible_people;
-            std::vector<float> number_of_infections_per_person;
+            std::vector<float> number_of_contractions_per_person;
             std::vector<float> time;
         };
 

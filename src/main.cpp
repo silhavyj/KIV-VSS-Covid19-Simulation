@@ -70,6 +70,9 @@ int main(int argc, char *argv[])
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
+    ImFont* font = io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
+    IM_ASSERT(font != NULL);
+
     int display_w;
     int display_h;
     while (!glfwWindowShouldClose(window))

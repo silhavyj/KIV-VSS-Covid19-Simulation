@@ -137,7 +137,7 @@ namespace kiv_vss
     inline void CSimulation::Update_Statistics(const TStatistics_Record& record)
     {
         m_statistics.number_of_susceptible_people.emplace_back(record.number_of_susceptible_people);
-        m_statistics.number_of_infections_per_person.emplace_back(record.number_of_infections_per_person);
+        m_statistics.number_of_contractions_per_person.emplace_back(record.number_of_infections_per_person);
         m_statistics.number_of_fatalities.emplace_back(record.number_of_fatalities);
         m_statistics.number_of_immune_people.emplace_back(record.number_of_immune_people);
         m_statistics.number_of_infected_people.emplace_back(record.number_of_infected_people);

@@ -11,10 +11,42 @@ namespace kiv_vss::gui
     void CSettings_Window::Render()
     {
         ImGui::Begin("Settings");
+        if (ImGui::BeginTabBar("tabs", ImGuiTabBarFlags_None))
+        {
+            if (ImGui::BeginTabItem("General"))
+            {
+               Render_General_Settings();
+            }
 
-        ImGui::SliderInt("Number of initially infected people", reinterpret_cast<int *>(&m_config->general.number_of_initially_infected_people), 1, 20);
-        ImGui::SliderFloat("% of self isolating people", reinterpret_cast<float *>(&m_config->general.ratio_of_people_in_self_isolation), 0.0f, 1.0f);
-
+            if (ImGui::BeginTabItem("Disease"))
+            {
+                Render_Disease_Settings();
+            }
+        }
         ImGui::End();
+    }
+
+    void CSettings_Window::Render_General_Settings() const
+    {
+        ImGui::SliderInt("Number of people", reinterpret_cast<int *>(&m_config->general.number_of_people), 1, 20);
+        ImGui::SliderInt("Number of initially infected people", reinterpret_cast<int *>(&m_config->general.number_of_initially_infected_people), 1, 20);
+        ImGui::SliderFloat("% of self isolating people", &m_config->general.ratio_of_people_in_self_isolation, 0.0f, 1.0f);
+        ImGui::SliderFloat("Saturation level", &m_config->general.saturation_level, 0.0f, 1.0f);
+    }
+
+    void CSettings_Window::Render_Disease_Settings() const
+    {
+        ImGui::SliderFloat("Transmission distance", &m_config->disease.transmission_distance, 0.0f, 10.0f);
+        ImGui::SliderFloat("Transmission probability on move", &m_config->disease.transmission_prob_on_move, 0.0f, 1.0f);
+        ImGui::SliderFloat("Transmission probability at home", &m_config->disease.transmission_prob_at_home, 0.0f, 1.0f);
+
+        ImGui::Separator();
+
+        ImGui::SliderFloat("Death probability", &m_config->disease.death_prob, 0.0f, 1.0f);
+        ImGui::SliderFloat("Death probability when saturated", &m_config->disease.death_saturated_prob, 0.0f, 1.0f);
+
+        ImGui::Separator();
+
+        ImGui::SliderFloat("Self-isolating when infected", &m_config->disease.self_isolating_when_infected, 0.0f, 1.0f);
     }
 }

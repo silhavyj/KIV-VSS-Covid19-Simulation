@@ -1,6 +1,8 @@
 #include <vector>
 
+#include "implot.h"
 #include "gui.h"
+
 #include "settings_window.h"
 #include "simulation_window.h"
 #include "plots_window.h"
@@ -33,6 +35,9 @@ namespace kiv_vss::gui
         Render_Control_Window();
         Update_Simulation();
         std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) { window->Render(); });
+
+        // TODO just a test
+        // ImPlot::ShowDemoWindow();
     }
 
     inline static void Update_Simulation()
