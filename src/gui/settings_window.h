@@ -8,7 +8,7 @@ namespace kiv_vss::gui
     {
     public:
         explicit CSettings_Window(CSimulation* simulation);
-        ~CSettings_Window() = default;
+        ~CSettings_Window() override = default;
 
         void Render() override;
 

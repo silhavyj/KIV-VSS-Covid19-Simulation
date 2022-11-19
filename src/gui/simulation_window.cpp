@@ -4,7 +4,7 @@
 
 namespace kiv_vss::gui
 {
-    CSimulation_Window::CSimulation_Window(CSimulation* simulation, bool* display_popular_locations)
+    CSimulation_Window::CSimulation_Window(CSimulation* simulation, const bool* display_popular_locations)
         : GUI_Window(simulation),
           m_display_popular_locations{display_popular_locations}
     {
@@ -23,6 +23,7 @@ namespace kiv_vss::gui
             ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
             std::for_each(people.begin(), people.end(), [&](auto person) { Draw_Person(person, draw_list); });
+
             if (*m_display_popular_locations)
             {
                 std::for_each(popular_locations.begin(), popular_locations.end(), [&](auto location) { Draw_Popular_Location(location, draw_list); });
@@ -109,16 +110,16 @@ namespace kiv_vss::gui
         switch (state)
         {
             case CPerson::NInfection_State::Immune:
-                return ImVec4(0.0f, 0.8f, 1.0f, 0.5f);
+                return {0.0f, 0.8f, 1.0f, 0.5f};
 
             case CPerson::NInfection_State::Infected:
-                return ImVec4(0.0f, 1.0f, 0.0f, 0.5f);
+                return {0.0f, 1.0f, 0.0f, 0.5f};
 
             case CPerson::NInfection_State::Susceptible:
-                return ImVec4(0.5f, 0.5f, 0.5f, 0.5f);
+                return {0.5f, 0.5f, 0.5f, 0.5f};
 
             case CPerson::NInfection_State::Dead:
-                return ImVec4(1.0f, 0.0f, 0.0f, 0.5f);
+                return {1.0f, 0.0f, 0.0f, 0.5f};
 
             default:
                 spdlog::error("Person's color could not be determined. Returning {} as the default color.");

@@ -8,7 +8,7 @@ namespace kiv_vss::gui
     {
     public:
         explicit CPlots_Window(CSimulation* simulation);
-        ~CPlots_Window() = default;
+        ~CPlots_Window() override = default;
 
         void Render() override;
     };

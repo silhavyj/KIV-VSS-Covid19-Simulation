@@ -8,12 +8,12 @@ namespace kiv_vss::gui
     {
     public:
         explicit CStatistics_Window(CSimulation* simulation);
-        ~CStatistics_Window() = default;
+        ~CStatistics_Window() override = default;
 
         void Render() override;
 
     private:
-        double Get_Number_Of_People_Percentage(const std::vector<float>& data) const noexcept;
-        double Get_Percentage_People(double value) const noexcept;
+        [[nodiscard]] double Get_Number_Of_People_Percentage(const std::vector<float>& data) const noexcept;
+        [[nodiscard]] double Get_Percentage_People(double value) const noexcept;
     };
 }
