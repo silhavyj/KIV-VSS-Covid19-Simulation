@@ -10,14 +10,14 @@ namespace kiv_vss::gui
     class GUI_Window
     {
     public:
-        explicit GUI_Window(const CSimulation* simulation);
+        explicit GUI_Window(CSimulation* simulation);
         virtual ~GUI_Window() = default;
 
-        void Set_Simulation(const CSimulation* simulation);
+        void Set_Simulation(CSimulation* simulation);
         virtual void Render() = 0;
 
     protected:
-        const CSimulation* m_simulation;
+        CSimulation* m_simulation;
         TConfig* m_config;
     };
 }

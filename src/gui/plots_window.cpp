@@ -4,7 +4,7 @@
 
 namespace kiv_vss::gui
 {
-    CPlots_Window::CPlots_Window(const CSimulation* simulation)
+    CPlots_Window::CPlots_Window(CSimulation* simulation)
         : GUI_Window(simulation)
     {
 

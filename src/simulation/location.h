@@ -11,7 +11,7 @@ namespace kiv_vss
         using Point = std::pair<double, double>;
 
     public:
-        explicit CLocation(double y, double  x) noexcept;
+        explicit CLocation(double y, double x) noexcept;
         CLocation(const CLocation& location) = default;
         ~CLocation() = default;
 

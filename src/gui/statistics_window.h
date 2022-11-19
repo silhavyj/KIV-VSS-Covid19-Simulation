@@ -7,7 +7,7 @@ namespace kiv_vss::gui
     class CStatistics_Window : public GUI_Window
     {
     public:
-        explicit CStatistics_Window(const CSimulation* simulation);
+        explicit CStatistics_Window(CSimulation* simulation);
         ~CStatistics_Window() = default;
 
         void Render() override;

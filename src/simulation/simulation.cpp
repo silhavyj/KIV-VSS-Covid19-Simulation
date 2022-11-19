@@ -63,12 +63,6 @@ namespace kiv_vss
 
     void CSimulation::Generate_Population()
     {
-        // TODO temporary (delete)
-        for (std::size_t i = 0; i < 3; ++i)
-        {
-            m_popular_locations.emplace_back(CLocation::Generate_Random_In_Square_Location(0.25 * m_config->general.world_size, 0.75 * m_config->general.world_size));
-        }
-
         const auto number_of_people_in_self_isolation = static_cast<std::size_t>(
             static_cast<double>(m_config->general.number_of_people) * m_config->general.ratio_of_people_in_self_isolation
         );

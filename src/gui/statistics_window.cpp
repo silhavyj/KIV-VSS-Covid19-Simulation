@@ -2,7 +2,7 @@
 
 namespace kiv_vss::gui
 {
-    CStatistics_Window::CStatistics_Window(const CSimulation* simulation)
+    CStatistics_Window::CStatistics_Window(CSimulation* simulation)
         : GUI_Window(simulation)
     {
 
