@@ -73,5 +73,17 @@ namespace kiv_vss::gui
         ImGui::SliderInt("Maximum hours spent at a location", reinterpret_cast<int *>(&m_config->mobility.max_hours_spent_at_location), 1, 72);
 
         ImGui::Separator();
+
+        ImGui::Text("Self-isolation");
+        ImGui::InputFloat("Go to a popular place (prob) [1]", &m_config->mobility.isolation.go_to_popular_location_prob, 0.1);
+        ImGui::InputFloat("Go to a random location (prob) [1]", &m_config->mobility.isolation.go_to_random_location_prob, 0.1);
+        ImGui::InputFloat("Go home (prob) [1]", &m_config->mobility.isolation.go_home_prob, 0.1);
+
+        ImGui::Separator();
+
+        ImGui::Text("\"Free\"");
+        ImGui::InputFloat("Go to a popular place (prob) [2]", &m_config->mobility.non_isolation.go_to_popular_location_prob, 0.1);
+        ImGui::InputFloat("Go to a random location (prob) [2]", &m_config->mobility.non_isolation.go_to_random_location_prob, 0.1);
+        ImGui::InputFloat("Go home (prob) [2]", &m_config->mobility.non_isolation.go_home_prob, 0.1);
     }
 }

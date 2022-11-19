@@ -44,9 +44,9 @@ namespace kiv_vss
 
         struct TTransition
         {
-            double go_to_popular_location_prob;
-            double go_to_random_location_prob;
-            double go_home_prob;
+            float go_to_popular_location_prob;
+            float go_to_random_location_prob;
+            float go_home_prob;
         };
 
         TTransition isolation     { 0.001, 0.001, 0.998 };
