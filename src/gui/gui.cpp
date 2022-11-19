@@ -1,4 +1,5 @@
 #include <vector>
+#include <algorithm>
 
 #include "implot.h"
 #include "gui.h"

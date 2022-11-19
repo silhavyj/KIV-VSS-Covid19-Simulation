@@ -7,7 +7,7 @@ namespace kiv_vss::gui
     class CSimulation_Window : public GUI_Window
     {
     public:
-        CSimulation_Window(const CSimulation* simulation);
+        explicit CSimulation_Window(const CSimulation* simulation);
         ~CSimulation_Window() = default;
 
         void Render() override;

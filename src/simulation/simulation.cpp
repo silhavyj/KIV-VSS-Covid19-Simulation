@@ -30,33 +30,33 @@ namespace kiv_vss
         m_popular_locations.push_back(location);
     }
 
-    const CSimulation::TStatistics& CSimulation::Get_Statistics() const
+    const CSimulation::TStatistics& CSimulation::Get_Statistics() const noexcept
     {
         return m_statistics;
     }
 
-    bool CSimulation::Is_System_Saturated() const
+    bool CSimulation::Is_System_Saturated() const noexcept
     {
         return m_system_saturated;
     }
 
-    const std::vector<CPerson>& CSimulation::Get_People() const
+    const std::vector<CPerson>& CSimulation::Get_People() const noexcept
     {
         return m_people;
     }
 
-    bool CSimulation::Is_Simulation_Over() const
+    bool CSimulation::Is_Simulation_Over() const noexcept
     {
         return !m_statistics.number_of_infected_people.empty() &&
                0 == m_statistics.number_of_infected_people.back();
     }
 
-    std::size_t CSimulation::Get_Maximum_Number_Of_Infected_People() const
+    std::size_t CSimulation::Get_Maximum_Number_Of_Infected_People() const noexcept
     {
         return m_max_number_of_infected_people;
     }
 
-    const std::vector<CLocation>& CSimulation::Get_Popular_Locations() const
+    const std::vector<CLocation>& CSimulation::Get_Popular_Locations() const noexcept
     {
         return m_popular_locations;
     }
@@ -129,7 +129,7 @@ namespace kiv_vss
         {
             Update_Statistics(record);
             m_max_number_of_infected_people = std::max(m_max_number_of_infected_people, static_cast<std::size_t>(record.number_of_infected_people));
-            float infected_percentage = record.number_of_infected_people / m_config->general.number_of_people;
+            const float infected_percentage = record.number_of_infected_people / m_config->general.number_of_people;
             m_system_saturated = infected_percentage > m_config->general.saturation_level;
         }
     }

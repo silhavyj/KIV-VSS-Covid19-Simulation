@@ -57,12 +57,12 @@ namespace kiv_vss
         }
     }
 
-    const CPerson* CInfection_Model::Get_Person() const
+    const CPerson* CInfection_Model::Get_Person() const noexcept
     {
         return m_person;
     }
 
-    std::size_t CInfection_Model::Get_Infection_Count() const
+    std::size_t CInfection_Model::Get_Infection_Count() const noexcept
     {
         return m_infection_counter;
     }

@@ -18,20 +18,20 @@ namespace kiv_vss::gui
 
         ImGui::Separator();
 
-        ImGui::Text("Currently infected people [%] = %.2f", Get_Number_Of_People_Percentage(statistics.number_of_infected_people));
-        ImGui::Text("Currently immune people [%] = %.2f", Get_Number_Of_People_Percentage(statistics.number_of_immune_people));
-        ImGui::Text("Currently susceptible people [%] = %.2f", Get_Number_Of_People_Percentage(statistics.number_of_susceptible_people));
+        ImGui::Text("Currently infected people = %.2f [%%]", Get_Number_Of_People_Percentage(statistics.number_of_infected_people));
+        ImGui::Text("Currently immune people = %.2f [%%]", Get_Number_Of_People_Percentage(statistics.number_of_immune_people));
+        ImGui::Text("Currently susceptible people = %.2f [%%]", Get_Number_Of_People_Percentage(statistics.number_of_susceptible_people));
 
         ImGui::Separator();
 
-        ImGui::Text("Total fatality rate [%] = %.2f", Get_Number_Of_People_Percentage(statistics.number_of_fatalities));
-        ImGui::Text("Infected people (peek) [%] = %.2f", Get_Percentage_People(m_simulation->Get_Maximum_Number_Of_Infected_People()));
+        ImGui::Text("Total fatality rate = %.2f [%%]", Get_Number_Of_People_Percentage(statistics.number_of_fatalities));
+        ImGui::Text("Infected people (peek) = %.2f [%%]", Get_Percentage_People(m_simulation->Get_Maximum_Number_Of_Infected_People()));
         ImGui::Text("Number of contractions per person = %.2f", statistics.time.empty() ? 0.0 : statistics.number_of_contractions_per_person.back());
 
         ImGui::End();
     }
 
-    inline double CStatistics_Window::Get_Number_Of_People_Percentage(const std::vector<float>& data) const
+    inline double CStatistics_Window::Get_Number_Of_People_Percentage(const std::vector<float>& data) const noexcept
     {
         if (data.empty())
         {
@@ -40,7 +40,7 @@ namespace kiv_vss::gui
         return Get_Percentage_People(data.back());
     }
 
-    inline double CStatistics_Window::Get_Percentage_People(double value) const
+    inline double CStatistics_Window::Get_Percentage_People(double value) const noexcept
     {
         return 100.0 * value / m_config->general.number_of_people;
     }

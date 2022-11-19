@@ -6,7 +6,7 @@
 
 namespace kiv_vss
 {
-    CLocation::CLocation(double y, double  x)
+    CLocation::CLocation(double y, double  x) noexcept
         : m_y(y),
           m_x(x)
     {
@@ -30,17 +30,17 @@ namespace kiv_vss
         return !((*this) == location);
     }
 
-    double CLocation::Get_Y() const
+    double CLocation::Get_Y() const noexcept
     {
         return m_y;
     }
 
-    double CLocation::Get_X() const
+    double CLocation::Get_X() const noexcept
     {
         return m_x;
     }
 
-    CLocation::Point CLocation::Get_Coordinates() const
+    CLocation::Point CLocation::Get_Coordinates() const noexcept
     {
         return { Get_Y(), Get_X() };
     }
@@ -62,7 +62,7 @@ namespace kiv_vss
         }
     }
 
-    inline CLocation::Point CLocation::Subtract_Coordinates(const CLocation& location) const
+    inline CLocation::Point CLocation::Subtract_Coordinates(const CLocation& location) const noexcept
     {
         return { location.m_y - m_y, location.m_x - m_x };
     }

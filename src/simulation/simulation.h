@@ -37,12 +37,12 @@ namespace kiv_vss
 
         void Update();
         void Add_Popular_Location(const CLocation& location);
-        [[nodiscard]] const TStatistics& Get_Statistics() const;
-        [[nodiscard]] const std::vector<CPerson>& Get_People() const;
-        [[nodiscard]] const std::vector<CLocation>& Get_Popular_Locations() const;
-        [[nodiscard]] bool Is_System_Saturated() const;
-        [[nodiscard]] bool Is_Simulation_Over() const;
-        [[nodiscard]] std::size_t Get_Maximum_Number_Of_Infected_People() const;
+        [[nodiscard]] const TStatistics& Get_Statistics() const noexcept;
+        [[nodiscard]] const std::vector<CPerson>& Get_People() const noexcept;
+        [[nodiscard]] const std::vector<CLocation>& Get_Popular_Locations() const noexcept;
+        [[nodiscard]] bool Is_System_Saturated() const noexcept;
+        [[nodiscard]] bool Is_Simulation_Over() const noexcept;
+        [[nodiscard]] std::size_t Get_Maximum_Number_Of_Infected_People() const noexcept;
 
     private:
         void Update_Statistics(const TStatistics_Record& record);

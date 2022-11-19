@@ -21,11 +21,11 @@ namespace kiv_vss
         ~CPerson() = default;
 
 
-        [[nodiscard]] const CLocation& Get_Current_Location() const;
-        [[nodiscard]] const CLocation& Get_Home_Location() const;
+        [[nodiscard]] const CLocation& Get_Current_Location() const noexcept;
+        [[nodiscard]] const CLocation& Get_Home_Location() const noexcept;
         [[nodiscard]] bool Is_Home() const;
-        void Set_Infection_State(NInfection_State infection_state);
-        [[nodiscard]] NInfection_State Get_Infection_State() const;
+        void Set_Infection_State(NInfection_State infection_state) noexcept;
+        [[nodiscard]] NInfection_State Get_Infection_State() const noexcept;
         void Move_Toward(const CLocation& location);
 
     private:

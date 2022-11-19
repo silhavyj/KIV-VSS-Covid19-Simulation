@@ -14,7 +14,7 @@ static constexpr const char* Window_Title = "KIV/VSS - Covid 19 Simulation";
 static constexpr uint32_t Window_Width = 1240;
 static constexpr uint32_t Window_Height = 720;
 
-int main(int argc, char *argv[])
+int main(int argc, const char* argv[])
 {
     static_cast<void>(argc);
     static_cast<void>(argv);
@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    ImFont* font = io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
+    const ImFont* font = io.Fonts->AddFontFromFileTTF(argv[1], 15.0f);
     IM_ASSERT(font != NULL);
 
     int display_w;

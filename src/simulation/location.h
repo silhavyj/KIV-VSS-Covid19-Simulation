@@ -11,7 +11,7 @@ namespace kiv_vss
         using Point = std::pair<double, double>;
 
     public:
-        explicit CLocation(double y, double  x);
+        explicit CLocation(double y, double  x) noexcept;
         CLocation(const CLocation& location) = default;
         ~CLocation() = default;
 
@@ -20,9 +20,9 @@ namespace kiv_vss
         [[nodiscard]] bool operator==(const CLocation& location) const;
         [[nodiscard]] bool operator!=(const CLocation& location) const;
 
-        [[nodiscard]] double Get_Y() const;
-        [[nodiscard]] double Get_X() const;
-        [[nodiscard]] Point Get_Coordinates() const;
+        [[nodiscard]] double Get_Y() const noexcept;
+        [[nodiscard]] double Get_X() const noexcept;
+        [[nodiscard]] Point Get_Coordinates() const noexcept;
 
         void Move_Toward(const CLocation& location, double distance);
         static CLocation Generate_Random_In_Square_Location(double min, double max);
@@ -31,7 +31,7 @@ namespace kiv_vss
         friend std::string to_string(const CLocation& location);
 
     private:
-        [[nodiscard]] Point Subtract_Coordinates(const CLocation& location) const;
+        [[nodiscard]] Point Subtract_Coordinates(const CLocation& location) const noexcept;
 
     private:
         double m_y;

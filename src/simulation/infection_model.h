@@ -13,8 +13,8 @@ namespace kiv_vss
 
         void Infect();
         void Update();
-        [[nodiscard]] const CPerson* Get_Person() const;
-        [[nodiscard]] std::size_t Get_Infection_Count() const;
+        [[nodiscard]] const CPerson* Get_Person() const noexcept;
+        [[nodiscard]] std::size_t Get_Infection_Count() const noexcept;
 
     private:
         [[nodiscard]] std::size_t Generate_Random_Infection_Period() const;

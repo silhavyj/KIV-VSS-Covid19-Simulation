@@ -28,7 +28,7 @@ namespace kiv_vss::utils
         std::random_device rand_dev{};
         std::uniform_real_distribution<> uniform_dist{};
 
-        double value = uniform_dist(rand_dev);
+        const double value = uniform_dist(rand_dev);
         auto it = std::upper_bound(probabilities.begin(), probabilities.end(), value);
 
         if (it == probabilities.end())

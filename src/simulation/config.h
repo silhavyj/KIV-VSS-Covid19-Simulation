@@ -8,7 +8,7 @@ namespace kiv_vss
     {
         std::size_t number_of_people{1000};
         std::size_t number_of_initially_infected_people{5};
-        float ratio_of_people_in_self_isolation{0.1};
+        float ratio_of_people_in_self_isolation{0.5};
         float saturation_level{0.2};
         double world_size{5000};
     };
@@ -16,21 +16,21 @@ namespace kiv_vss
     struct TDisease
     {
         float transmission_distance{5};
-        float transmission_prob_on_move{0.65};
+        float transmission_prob_on_move{0.5};
         float transmission_prob_at_home{0.5};
         float death_prob{0.15};
         float death_saturated_prob{0.3};
-        float self_isolating_when_infected{0.1};
+        float self_isolating_when_infected{0.5};
 
         std::size_t average_infection_period{14};
         std::size_t average_immunity_period{60};
 
-        [[nodiscard]] inline std::size_t Get_Average_Infection_Period() const
+        [[nodiscard]] inline std::size_t Get_Average_Infection_Period() const noexcept
         {
             return 24 * average_infection_period;
         }
 
-        [[nodiscard]] inline std::size_t Get_Average_Immunity_Period() const
+        [[nodiscard]] inline std::size_t Get_Average_Immunity_Period() const noexcept
         {
             return 24 * average_immunity_period;
         }

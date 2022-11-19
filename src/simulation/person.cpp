@@ -15,12 +15,12 @@ namespace kiv_vss
     }
 
 
-    const CLocation& CPerson::Get_Current_Location() const
+    const CLocation& CPerson::Get_Current_Location() const noexcept
     {
         return m_current_location;
     }
 
-    const CLocation& CPerson::Get_Home_Location() const
+    const CLocation& CPerson::Get_Home_Location() const noexcept
     {
         return m_home_location;
     }
@@ -30,12 +30,12 @@ namespace kiv_vss
         return m_current_location == m_home_location;
     }
 
-    void CPerson::Set_Infection_State(NInfection_State infection_state)
+    void CPerson::Set_Infection_State(NInfection_State infection_state) noexcept
     {
         m_infection_state = infection_state;
     }
 
-    CPerson::NInfection_State CPerson::Get_Infection_State() const
+    CPerson::NInfection_State CPerson::Get_Infection_State() const noexcept
     {
         return m_infection_state;
     }

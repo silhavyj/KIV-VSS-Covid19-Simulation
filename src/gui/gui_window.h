@@ -10,7 +10,7 @@ namespace kiv_vss::gui
     class GUI_Window
     {
     public:
-        GUI_Window(const CSimulation* simulation);
+        explicit GUI_Window(const CSimulation* simulation);
         virtual ~GUI_Window() = default;
 
         void Set_Simulation(const CSimulation* simulation);
