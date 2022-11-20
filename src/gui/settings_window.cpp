@@ -2,8 +2,9 @@
 
 namespace kiv_vss::gui
 {
-    CSettings_Window::CSettings_Window(CSimulation* simulation)
-        : GUI_Window(simulation)
+    CSettings_Window::CSettings_Window(CSimulation* simulation, const bool* simulating_running)
+        : GUI_Window(simulation),
+          m_simulating_running{simulating_running}
     {
 
     }
@@ -11,6 +12,19 @@ namespace kiv_vss::gui
     void CSettings_Window::Render()
     {
         ImGui::Begin("Settings");
+        if (*m_simulating_running)
+        {
+            Render_Simulation_Running_Message();
+        }
+        else
+        {
+            Render_Settings();
+        }
+        ImGui::End();
+    }
+
+    inline void CSettings_Window::Render_Settings() const
+    {
         if (ImGui::BeginTabBar("tabs"))
         {
             if (ImGui::BeginTabItem("General"))
@@ -31,10 +45,14 @@ namespace kiv_vss::gui
                 ImGui::EndTabItem();
             }
         }
-        ImGui::End();
     }
 
-    void CSettings_Window::Render_General_Settings() const
+    inline void CSettings_Window::Render_Simulation_Running_Message() const
+    {
+        ImGui::Text("The simulation is currently running.\nYou have to wait until it finishes or gets reset to be able to make changes to it.");
+    }
+
+    inline void CSettings_Window::Render_General_Settings() const
     {
         ImGui::SliderInt("Number of people", reinterpret_cast<int *>(&m_config->general.number_of_people), 10, 1500);
         ImGui::SliderInt("Number of initially infected people", reinterpret_cast<int *>(&m_config->general.number_of_initially_infected_people), 1, 20);
@@ -42,7 +60,7 @@ namespace kiv_vss::gui
         ImGui::SliderFloat("Saturation level", &m_config->general.saturation_level, 0.0f, 1.0f);
     }
 
-    void CSettings_Window::Render_Disease_Settings() const
+    inline void CSettings_Window::Render_Disease_Settings() const
     {
         ImGui::SliderFloat("Transmission distance", &m_config->disease.transmission_distance, 0.0f, 50.0f);
         ImGui::SliderFloat("Transmission probability on move", &m_config->disease.transmission_prob_on_move, 0.0f, 1.0f);
@@ -63,7 +81,7 @@ namespace kiv_vss::gui
         ImGui::SliderInt("Average immunity period [days]", reinterpret_cast<int *>(&m_config->disease.average_immunity_period), 1, 90);
     }
 
-    void CSettings_Window::Render_Mobility_Settings() const
+    inline void CSettings_Window::Render_Mobility_Settings() const
     {
         ImGui::SliderFloat("Average person's speed", &m_config->mobility.average_person_speed, 1.0f, 20.0f);
         ImGui::SliderFloat("Variance of person's speed", &m_config->mobility.variance_person_speed, 1.0f, 5.0f);

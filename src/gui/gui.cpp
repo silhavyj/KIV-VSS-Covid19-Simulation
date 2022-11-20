@@ -17,7 +17,7 @@ namespace kiv_vss::gui
     static bool s_simulation_running{false};
     static bool s_display_popular_locations{true};
 
-    static CSettings_Window s_settings_window(s_simulation);
+    static CSettings_Window s_settings_window(s_simulation, &s_simulation_running);
     static CSimulation_Window s_simulation_window(s_simulation, &s_display_popular_locations, &s_simulation_running);
     static CPlots_Window s_plots_window(s_simulation);
     static CStatistics_Window s_statistics_window(s_simulation);
@@ -53,6 +53,7 @@ namespace kiv_vss::gui
             if (!s_simulation_over && s_stop_simulation_when_nobody_infected)
             {
                 s_simulation_over = s_simulation->Is_Simulation_Over();
+                s_simulation_running = !s_simulation_over;
             }
         }
     }
