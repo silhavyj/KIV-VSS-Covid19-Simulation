@@ -99,7 +99,7 @@ namespace kiv_vss::gui
 
         ImGui::Separator();
 
-        ImGui::Text("\"Free\"");
+        ImGui::Text("Free to move around");
         ImGui::InputFloat("Go to a popular place (prob) [2]", &m_config->mobility.non_isolation.go_to_popular_location_prob, 0.1);
         ImGui::InputFloat("Go to a random location (prob) [2]", &m_config->mobility.non_isolation.go_to_random_location_prob, 0.1);
         ImGui::InputFloat("Go home (prob) [2]", &m_config->mobility.non_isolation.go_home_prob, 0.1);

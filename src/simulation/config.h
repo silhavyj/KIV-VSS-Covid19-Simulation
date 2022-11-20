@@ -6,7 +6,7 @@ namespace kiv_vss
 {
     struct TGeneral
     {
-        std::size_t number_of_people{1000};
+        std::size_t number_of_people{500};
         std::size_t number_of_initially_infected_people{5};
         float ratio_of_people_in_self_isolation{0.5};
         float saturation_level{0.2};
