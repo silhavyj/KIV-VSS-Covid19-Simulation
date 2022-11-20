@@ -11,6 +11,7 @@
 namespace kiv_vss::gui
 {
     static CSimulation* s_simulation = new CSimulation;
+
     static bool s_play{false};
     static bool s_stop_simulation_when_nobody_infected{true};
     static bool s_simulation_over{false};
