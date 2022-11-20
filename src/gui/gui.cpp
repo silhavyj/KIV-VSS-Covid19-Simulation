@@ -51,7 +51,7 @@ namespace kiv_vss::gui
             s_simulation->Update();
             s_simulation_running = true;
 
-            if (!s_simulation_over && s_stop_simulation_when_nobody_infected)
+            if (s_stop_simulation_when_nobody_infected)
             {
                 s_simulation_over = s_simulation->Is_Simulation_Over();
                 s_simulation_running = !s_simulation_over;
