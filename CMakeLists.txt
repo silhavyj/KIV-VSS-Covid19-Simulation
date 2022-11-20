@@ -6,8 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(
     covid19_sim
     VERSION 0.0.1
-    DESCRIPTION ""
-    HOMEPAGE_URL "%%myurl%%"
+    DESCRIPTION "KIV/VSS - Semester project"
+    HOMEPAGE_URL "https://github.com/silhavyj/KIV-VSS-Covid19-Simulation"
     LANGUAGES CXX C
 )
 
