@@ -10,9 +10,9 @@
 
 #include "gui/gui.h"
 
-static constexpr const char* Window_Title = "KIV/VSS - Covid 19 Simulation";
-static constexpr uint32_t Window_Width = 1240;
-static constexpr uint32_t Window_Height = 720;
+inline constexpr const char* Window_Title = "KIV/VSS - Covid 19 Simulation";
+inline constexpr uint32_t Window_Width = 1240;
+inline constexpr uint32_t Window_Height = 720;
 
 int main(int argc, const char* argv[])
 {
