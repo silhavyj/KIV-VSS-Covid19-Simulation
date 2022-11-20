@@ -1,11 +1,5 @@
 set(EXECUTABLE_NAME ${PROJECT_NAME})
 
-if(MSVC)
-    string(REGEX REPLACE "/W[1-3]" "/W4" "/O1" "/O2" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
-else()
-    add_compile_options(-Wall -Wextra -pedantic -Werror -O3)
-endif()
-
 file(GLOB_RECURSE cpp_files "./*.cpp")
 file(GLOB_RECURSE h_files "./*.h")
 file(GLOB_RECURSE hpp_files "./*.hpp")
