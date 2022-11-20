@@ -4,9 +4,10 @@
 
 namespace kiv_vss::gui
 {
-    CSimulation_Window::CSimulation_Window(CSimulation* simulation, const bool* display_popular_locations)
+    CSimulation_Window::CSimulation_Window(CSimulation* simulation, const bool* display_popular_locations, const bool* simulation_running)
         : GUI_Window(simulation),
-          m_display_popular_locations{display_popular_locations}
+          m_display_popular_locations{display_popular_locations},
+          m_simulation_running{simulation_running}
     {
 
     }
@@ -29,7 +30,7 @@ namespace kiv_vss::gui
                 std::for_each(popular_locations.begin(), popular_locations.end(), [&](auto location) { Draw_Popular_Location(location, draw_list); });
             }
 
-            if (ImGui::IsWindowFocused() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+            if (!*m_simulation_running && ImGui::IsWindowFocused() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
             {
                 Add_Popular_Location();
             }

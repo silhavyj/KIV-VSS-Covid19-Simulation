@@ -70,8 +70,14 @@ int main(int argc, const char* argv[])
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
 
-    const ImFont* font = io.Fonts->AddFontFromFileTTF(argv[1], 15.0f);
-    IM_ASSERT(font != NULL);
+    if (argc >= 2)
+    {
+        const ImFont* font = io.Fonts->AddFontFromFileTTF(argv[1], 15.0f);
+        if (nullptr == font)
+        {
+            spdlog::warn("Failed to load the font '{}'", argv[1]);
+        }
+    }
 
     int display_w;
     int display_h;

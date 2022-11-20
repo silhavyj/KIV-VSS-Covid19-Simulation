@@ -24,8 +24,8 @@ namespace kiv_vss::gui
 
         ImGui::Separator();
 
-        ImGui::Text("Total fatality rate = %.2f [%%]", Get_Number_Of_People_Percentage(statistics.number_of_fatalities));
         ImGui::Text("Infected people (peek) = %.2f [%%]", Get_Percentage_People(m_simulation->Get_Maximum_Number_Of_Infected_People()));
+        ImGui::Text("Total fatality rate = %.2f [%%]", Get_Number_Of_People_Percentage(statistics.number_of_fatalities));
         ImGui::Text("Number of contractions per person = %.2f", statistics.time.empty() ? 0.0 : statistics.number_of_contractions_per_person.back());
 
         ImGui::End();

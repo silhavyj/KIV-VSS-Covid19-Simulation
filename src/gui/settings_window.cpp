@@ -44,7 +44,7 @@ namespace kiv_vss::gui
 
     void CSettings_Window::Render_Disease_Settings() const
     {
-        ImGui::SliderFloat("Transmission distance", &m_config->disease.transmission_distance, 0.0f, 10.0f);
+        ImGui::SliderFloat("Transmission distance", &m_config->disease.transmission_distance, 0.0f, 50.0f);
         ImGui::SliderFloat("Transmission probability on move", &m_config->disease.transmission_prob_on_move, 0.0f, 1.0f);
         ImGui::SliderFloat("Transmission probability at home", &m_config->disease.transmission_prob_at_home, 0.0f, 1.0f);
 

@@ -7,7 +7,7 @@ namespace kiv_vss::gui
     class CSimulation_Window : public GUI_Window
     {
     public:
-        explicit CSimulation_Window(CSimulation* simulation, const bool* display_popular_locations);
+        explicit CSimulation_Window(CSimulation* simulation, const bool* display_popular_locations, const bool* simulation_running);
         ~CSimulation_Window() override = default;
 
         void Render() override;
@@ -26,5 +26,6 @@ namespace kiv_vss::gui
 
     private:
         const bool* m_display_popular_locations;
+        const bool* m_simulation_running;
     };
 }
