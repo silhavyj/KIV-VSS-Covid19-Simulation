@@ -39,3 +39,5 @@ namespace kiv_vss
         double m_speed;
     };
 }
+
+// EOF

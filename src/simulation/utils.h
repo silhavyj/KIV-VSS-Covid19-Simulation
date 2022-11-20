@@ -16,3 +16,5 @@ namespace kiv_vss::utils
 
     size_t Pick_Event(std::vector<double> probabilities);
 }
+
+// EOF

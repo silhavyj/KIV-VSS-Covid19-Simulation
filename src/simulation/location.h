@@ -38,3 +38,5 @@ namespace kiv_vss
         double m_x;
     };
 }
+
+// EOF

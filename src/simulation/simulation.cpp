@@ -199,3 +199,5 @@ namespace kiv_vss
         return utils::Try_Event(m_config->disease.transmission_prob_on_move);
     }
 }
+
+// EOF

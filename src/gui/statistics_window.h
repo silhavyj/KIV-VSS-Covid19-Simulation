@@ -17,3 +17,5 @@ namespace kiv_vss::gui
         [[nodiscard]] double Get_Percentage_People(double value) const noexcept;
     };
 }
+
+// EOF

@@ -15,3 +15,5 @@ namespace kiv_vss::gui
         m_simulation = simulation;
     }
 }
+
+// EOF

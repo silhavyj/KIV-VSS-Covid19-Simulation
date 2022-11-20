@@ -89,3 +89,5 @@ namespace kiv_vss::gui
         ImGui::End();
     }
 }
+
+// EOF

@@ -13,3 +13,5 @@ namespace kiv_vss::gui
         void Render() override;
     };
 }
+
+// EOF

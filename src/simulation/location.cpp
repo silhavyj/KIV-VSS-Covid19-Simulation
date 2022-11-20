@@ -94,3 +94,5 @@ namespace kiv_vss
         return ss.str();
     }
 }
+
+// EOF

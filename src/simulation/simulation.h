@@ -64,3 +64,5 @@ namespace kiv_vss
         std::size_t m_max_number_of_infected_people;
     };
 }
+
+// EOF

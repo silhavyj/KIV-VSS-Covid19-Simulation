@@ -38,3 +38,5 @@ namespace kiv_vss::utils
         return static_cast<size_t>(it - probabilities.begin());
     }
 }
+
+// EOF

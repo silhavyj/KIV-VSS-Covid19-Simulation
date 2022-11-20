@@ -40,3 +40,5 @@ namespace kiv_vss
         std::size_t m_at_location_countdown;
     };
 }
+
+// EOF

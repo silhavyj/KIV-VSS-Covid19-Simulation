@@ -77,3 +77,5 @@ namespace kiv_vss
         return utils::Random<std::poisson_distribution<std::size_t>>(m_config->disease.Get_Average_Immunity_Period());
     }
 }
+
+// EOF

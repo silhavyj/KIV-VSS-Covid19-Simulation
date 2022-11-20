@@ -60,3 +60,5 @@ namespace kiv_vss
         TMobility mobility;
     };
 }
+
+// EOF

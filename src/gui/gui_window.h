@@ -21,3 +21,5 @@ namespace kiv_vss::gui
         TConfig* m_config;
     };
 }
+
+// EOF

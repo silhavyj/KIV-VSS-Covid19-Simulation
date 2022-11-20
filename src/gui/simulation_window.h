@@ -29,3 +29,5 @@ namespace kiv_vss::gui
         const bool* m_simulation_running;
     };
 }
+
+// EOF

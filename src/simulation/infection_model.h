@@ -28,3 +28,5 @@ namespace kiv_vss
         const bool* m_system_saturated;
     };
 }
+
+// EOF

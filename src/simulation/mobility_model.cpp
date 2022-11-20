@@ -129,3 +129,5 @@ namespace kiv_vss
         return utils::Random<std::uniform_int_distribution<std::size_t>>(0, m_config->mobility.max_hours_spent_at_location);
     }
 }
+
+// EOF

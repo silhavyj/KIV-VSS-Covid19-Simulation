@@ -29,3 +29,5 @@ namespace kiv_vss
     template<typename T>
     std::once_flag Singleton<T>::s_init_flag = {};
 }
+
+// EOF

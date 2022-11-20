@@ -105,3 +105,5 @@ namespace kiv_vss::gui
         ImGui::InputFloat("Go home (prob) [2]", &m_config->mobility.non_isolation.go_home_prob, 0.1);
     }
 }
+
+// EOF

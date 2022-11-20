@@ -128,3 +128,5 @@ namespace kiv_vss::gui
         }
     }
 }
+
+// EOF

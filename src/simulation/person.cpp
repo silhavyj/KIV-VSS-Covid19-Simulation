@@ -59,3 +59,5 @@ namespace kiv_vss
         return speed;
     }
 }
+
+// EOF

@@ -45,3 +45,5 @@ namespace kiv_vss::gui
         return 100.0 * value / m_config->general.number_of_people;
     }
 }
+
+// EOF
