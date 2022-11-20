@@ -23,7 +23,7 @@ namespace kiv_vss::gui
     static CPlots_Window s_plots_window(s_simulation);
     static CStatistics_Window s_statistics_window(s_simulation);
 
-    static std::vector<GUI_Window *> s_windows = {
+    static const std::vector<GUI_Window *> s_windows = {
         &s_settings_window,
         &s_simulation_window,
         &s_plots_window,
