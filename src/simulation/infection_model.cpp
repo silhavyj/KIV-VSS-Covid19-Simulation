@@ -53,7 +53,7 @@ namespace kiv_vss
 
                 // If they are infected
                 case CPerson::NInfection_State::Infected:
-                    // Roll a dice whether the person will die or develop immunity
+                    // Roll dice whether the person will die or develop immunity
                     // (depending on whether the heath care system is saturated or not).
                     if (utils::Try_Event(*m_system_saturated ? m_config->disease.death_saturated_prob : m_config->disease.death_prob))
                     {

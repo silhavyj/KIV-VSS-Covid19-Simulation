@@ -15,6 +15,7 @@ namespace kiv_vss
 
     double CLocation::operator-(const CLocation& location) const
     {
+        // Using Pythagorean theorem, to calculate the distance between two points.
         const auto [dy, dx] = Subtract_Coordinates(location);
         return std::sqrt((dy * dy) + (dx * dx));
     }
@@ -47,6 +48,8 @@ namespace kiv_vss
 
     void CLocation::Move_Toward(const CLocation& location, double distance)
     {
+        // Make sure we do not overshoot the location
+        // we are moving towards.
         if (((*this) - location) < distance)
         {
             m_y = location.m_y;
@@ -54,9 +57,11 @@ namespace kiv_vss
         }
         else
         {
+            // Calculate the angle to the final location.
             const auto [dy, dx] = Subtract_Coordinates(location);
             const double theta = std::atan2(dy, dx);
 
+            // Move toward the location by the given distance.
             m_x += distance * std::cos(theta);
             m_y += distance * std::sin(theta);
         }
@@ -69,6 +74,7 @@ namespace kiv_vss
 
     CLocation CLocation::Generate_Random_In_Square_Location(double min, double max)
     {
+        // Helper lambda function to generate a random coordinate.
         const auto Get_Random_Axis = [&]()
         {
             return utils::Random<std::uniform_real_distribution<double>>(min, max);
