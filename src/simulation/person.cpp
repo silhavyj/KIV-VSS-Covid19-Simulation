@@ -48,6 +48,8 @@ namespace kiv_vss
     inline double CPerson::Generate_Random_Speed() const
     {
         double speed;
+
+        // Make sure speed is a positive number.
         do
         {
             speed = kiv_vss::utils::Random<std::normal_distribution<>>(
