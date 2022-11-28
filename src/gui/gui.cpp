@@ -10,6 +10,7 @@
 
 namespace kiv_vss::gui
 {
+    // Simulation (backend logic)
     static CSimulation* s_simulation = new CSimulation;
 
     static bool s_play{false};
@@ -18,11 +19,13 @@ namespace kiv_vss::gui
     static bool s_simulation_running{false};
     static bool s_display_popular_locations{true};
 
+    // Create individual windows that make up the GUI.
     static CSettings_Window s_settings_window(s_simulation, &s_simulation_running);
     static CSimulation_Window s_simulation_window(s_simulation, &s_display_popular_locations, &s_simulation_running);
     static CPlots_Window s_plots_window(s_simulation);
     static CStatistics_Window s_statistics_window(s_simulation);
 
+    // Store the windows into a polymorphic container.
     static const std::vector<GUI_Window *> s_windows = {
         &s_settings_window,
         &s_simulation_window,
@@ -30,6 +33,7 @@ namespace kiv_vss::gui
         &s_statistics_window
     };
 
+    // Function prototypes.
     static void Render_Control_Window();
     static void Update_Simulation();
 
@@ -37,20 +41,25 @@ namespace kiv_vss::gui
     {
         Render_Control_Window();
         Update_Simulation();
+
+        // Render individual windows.
         std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) { window->Render(); });
 
         // Just for test/development purposes
+        //
         // ImPlot::ShowDemoWindow();
         // ImGui::ShowDemoWindow();
     }
 
     inline static void Update_Simulation()
     {
+        // Update the simulation unless it is over or the user pressed the pause button.
         if (s_play && !s_simulation_over)
         {
             s_simulation->Update();
-            s_simulation_running = true;
 
+            // Check whether the simulation is over.
+            s_simulation_running = true;
             if (s_stop_simulation_when_nobody_infected)
             {
                 s_simulation_over = s_simulation->Is_Simulation_Over();
@@ -61,19 +70,26 @@ namespace kiv_vss::gui
 
     inline static void Render_Control_Window()
     {
+        // Start the windows
         ImGui::Begin("Control");
 
+        // Play / Pause button
         if (ImGui::Button("Play / Pause"))
         {
             s_play = !s_play;
         }
 
+        // Put the next element on the same line.
         ImGui::SameLine();
 
+        // Reset button
         if (ImGui::Button("Reset"))
         {
+            // Create a new instance of the backend logic of the simulation.
             delete s_simulation;
             s_simulation = new CSimulation;
+
+            // Set the new simulation to all windows.
             std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) { window->Set_Simulation(s_simulation); });
 
             s_play = false;

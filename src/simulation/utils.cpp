@@ -15,8 +15,7 @@ namespace kiv_vss::utils
 
     size_t Pick_Event(std::vector<double> probabilities)
     {
-        // Helper struct to hold the probability
-        // of an event and its index
+        // Helper struct to hold the probability of an event and its index
         struct TSample
         {
             double probability;
