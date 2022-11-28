@@ -15,17 +15,37 @@ namespace kiv_vss::utils
 
     size_t Pick_Event(std::vector<double> probabilities)
     {
-        std::sort(probabilities.begin(), probabilities.end());
-        for (size_t i = 1; i < probabilities.size(); ++i)
+        // Helper struct to hold the probability
+        // of an event and its index
+        struct TSample
         {
-            probabilities[i] += probabilities[i - 1];
+            double probability;
+            std::size_t index;
+
+            bool operator<(const TSample& other) const
+            {
+                return probability < other.probability;
+            }
+        };
+
+        // Create samples out of the probabilities.
+        std::vector<TSample> samples;
+        for (std::size_t i = 0; i < probabilities.size(); ++i)
+        {
+            samples.emplace_back(probabilities[i], i);
+        }
+        
+        std::sort(samples.begin(), samples.end());
+        for (size_t i = 1; i < samples.size(); ++i)
+        {
+            samples[i].probability += samples[i - 1].probability;
         }
 
         // Make sure the probabilities add up to 100%.
         static constexpr double EPSILON = 0.0001;
-        if (std::abs(probabilities.back() - 1.0) > EPSILON)
+        if (std::abs(samples.back().probability - 1.0) > EPSILON)
         {
-            spdlog::error("ERROR: Sum of all probabilities must add up to 1.0, not {}. Returning 0 as the default value.", probabilities.back());
+            spdlog::error("ERROR: Sum of all probabilities must add up to 1.0, not {}. Returning 0 as the default value.", samples.back().probability);
             return 0;
         }
 
@@ -35,16 +55,18 @@ namespace kiv_vss::utils
         const double value = uniform_dist(rand_dev);
 
         // Binary search the interval the random number falls into.
-        auto it = std::upper_bound(probabilities.begin(), probabilities.end(), value);
+        auto it = std::upper_bound(samples.begin(), samples.end(), value, [&](double probability, const TSample& sample) {
+            return probability < sample.probability;
+        });
 
         // Make sure we do not overshoot.
-        if (it == probabilities.end())
+        if (it == samples.end())
         {
             std::advance(it, -1);
         }
 
         // Return the index of the event.
-        return static_cast<size_t>(it - probabilities.begin());
+        return it->index;
     }
 }
 
