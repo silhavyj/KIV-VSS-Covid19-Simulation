@@ -62,23 +62,23 @@ namespace kiv_vss
     void CMobility_Model::Check_Infection_State()
     {
         // Flip flop state, so we catch the person infected only once.
-        static bool seen_infected = false;
+        static bool s_seen_infected = false;
 
         const auto person_is_infected = m_person->Get_Infection_State() == CPerson::NInfection_State::Infected;
 
         // Person has been infected.
-        if (!seen_infected && person_is_infected)
+        if (!s_seen_infected && person_is_infected)
         {
-            seen_infected = true;
+            s_seen_infected = true;
 
             // Check if the person is going to self-isolate due to the virus.
             m_self_isolating_due_to_infection = utils::Try_Event(m_config->disease.self_isolating_when_infected);
         }
 
         // The person is no longer infected 
-        if (seen_infected && !person_is_infected)
+        if (s_seen_infected && !person_is_infected)
         {
-            seen_infected = false;
+            s_seen_infected = false;
             m_self_isolating_due_to_infection = false;
         }
     }
