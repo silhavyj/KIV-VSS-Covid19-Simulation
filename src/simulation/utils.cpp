@@ -6,8 +6,10 @@ namespace kiv_vss::utils
 {
     bool Try_Event(double probability)
     {
+        // Generate a random number <0; 1>.
         std::random_device rand_dev{};
         std::uniform_real_distribution<> uniform_dist{};
+
         return uniform_dist(rand_dev) <= probability;
     }
 
@@ -18,6 +20,8 @@ namespace kiv_vss::utils
         {
             probabilities[i] += probabilities[i - 1];
         }
+
+        // Make sure the probabilities add up to 100%.
         static constexpr double EPSILON = 0.0001;
         if (std::abs(probabilities.back() - 1.0) > EPSILON)
         {
@@ -25,16 +29,21 @@ namespace kiv_vss::utils
             return 0;
         }
 
+        // Generate a random number <0; 1>.
         std::random_device rand_dev{};
         std::uniform_real_distribution<> uniform_dist{};
-
         const double value = uniform_dist(rand_dev);
+
+        // Binary search the interval the random number falls into.
         auto it = std::upper_bound(probabilities.begin(), probabilities.end(), value);
 
+        // Make sure we do not overshoot.
         if (it == probabilities.end())
         {
             std::advance(it, -1);
         }
+
+        // Return the index of the event.
         return static_cast<size_t>(it - probabilities.begin());
     }
 }
