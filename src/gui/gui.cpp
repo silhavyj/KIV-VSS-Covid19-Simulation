@@ -102,6 +102,7 @@ namespace kiv_vss::gui
         ImGui::Checkbox("Stop the simulation if there are\nno infected people", &s_stop_simulation_when_nobody_infected);
         ImGui::Checkbox("Display popular locations", &s_display_popular_locations);
 
+        // End the window.
         ImGui::End();
     }
 }
