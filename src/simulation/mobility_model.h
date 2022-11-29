@@ -35,7 +35,7 @@ namespace kiv_vss
         void Check_Infection_State();
 
         /// Picks the next locating the person will go.
-        /// \return Person't next final destination
+        /// \return Person's next final destination
         [[nodiscard]] CLocation Pick_Next_Location() const;
 
         /// Picks a random popular location.

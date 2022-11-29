@@ -31,7 +31,7 @@ namespace kiv_vss::utils
         std::vector<TSample> samples;
         for (std::size_t i = 0; i < probabilities.size(); ++i)
         {
-            samples.emplace_back(probabilities[i], i);
+            samples.push_back({probabilities[i], i});
         }
         
         std::sort(samples.begin(), samples.end());

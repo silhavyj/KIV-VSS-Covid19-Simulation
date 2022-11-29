@@ -132,7 +132,7 @@ namespace kiv_vss
                 next_location = m_person->Get_Home_Location();
                 break;
 
-            // An error has ocurred.
+            // An error has occurred.
             default:
                 spdlog::error("ERROR: Pick_Event did not return a valid NMobility_State. Returning [0; 0] as the default position.");
                 break;

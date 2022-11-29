@@ -123,7 +123,7 @@ namespace kiv_vss
                 auto& manager1 = m_infection_managers.at(i);
                 auto& manager2 = m_infection_managers.at(j);
 
-                // Check if one can infected another.
+                // Check if one can infect another.
                 if (Try_To_Infect(manager1, manager2))
                 {
                     // Check which one was infected and infected the other person.
@@ -167,7 +167,7 @@ namespace kiv_vss
 
     inline void CSimulation::Update_Statistics_Record(TStatistics_Record& record, const CPerson& person, std::size_t infected_count)
     {
-        // Calculate the average of how many time each person has been infected with the virus so far.
+        // Calculate the average of how many times each person has been infected with the virus so far.
         record.number_of_infections_per_person += static_cast<double>(infected_count) / static_cast<double>(m_people.size());
         
         // Update the record based on the infection state of the person.
@@ -214,7 +214,7 @@ namespace kiv_vss
             return false;
         }
 
-        // Make sure their are in a close distance of each other.
+        // Make sure they are in a close distance of each other.
         if ((person1->Get_Current_Location() - person2->Get_Current_Location()) > m_config->disease.transmission_distance)
         {
             return false;

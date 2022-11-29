@@ -27,7 +27,7 @@ namespace kiv_vss
         // Generate a random period of time for which the infection will last.
         m_counter = Generate_Random_Infection_Period();
 
-        // Increment the counter indicating how many
+        // Increment the counter indicating how much
         // time the person has had the virus.
         ++m_infection_counter;
     }
