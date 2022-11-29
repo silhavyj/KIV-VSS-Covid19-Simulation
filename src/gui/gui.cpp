@@ -36,6 +36,7 @@ namespace kiv_vss::gui
     // Function prototypes.
     static void Render_Control_Window();
     static void Update_Simulation();
+    static void Render_Popular_Places_Table();
 
     void Render_GUI()
     {
@@ -102,8 +103,35 @@ namespace kiv_vss::gui
         ImGui::Checkbox("Stop the simulation if there are\nno infected people", &s_stop_simulation_when_nobody_infected);
         ImGui::Checkbox("Display popular locations", &s_display_popular_locations);
 
+        ImGui::Separator();
+        Render_Popular_Places_Table();
+
         // End the window.
         ImGui::End();
+    }
+
+    static void Render_Popular_Places_Table()
+    {
+        // TODO
+
+        static ImGuiTableFlags flags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable;
+        if (ImGui::BeginTable("table1", 3, flags))
+        {
+            ImGui::TableSetupColumn("Index", ImGuiTableColumnFlags_WidthFixed);
+            ImGui::TableSetupColumn("Y", ImGuiTableColumnFlags_WidthFixed);
+            ImGui::TableSetupColumn("X", ImGuiTableColumnFlags_WidthStretch);
+            ImGui::TableHeadersRow();
+            for (int row = 0; row < 5; row++)
+            {
+                ImGui::TableNextRow();
+                for (int column = 0; column < 3; column++)
+                {
+                    ImGui::TableSetColumnIndex(column);
+                    ImGui::Text("%s %d,%d", (column == 2) ? "Stretch" : "Fixed", column, row);
+                }
+            }
+            ImGui::EndTable();
+        }
     }
 }
 
