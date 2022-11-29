@@ -61,7 +61,7 @@ namespace kiv_vss::gui
     inline void CSettings_Window::Render_Simulation_Running_Message() const
     {
         // Display a message to the user that the simulation is currently
-        // and no changes can me made to it.
+        // and no changes can be made to it.
         ImGui::Text("The simulation is currently running.\nYou have to wait until it finishes or gets reset to be able to make changes to it.");
     }
 

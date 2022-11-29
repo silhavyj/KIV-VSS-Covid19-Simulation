@@ -64,7 +64,7 @@ namespace kiv_vss::gui
         mouse_x /= (v_max.x - v_min.x);
         mouse_y /= (v_max.y - v_min.y);
 
-        // Check the user clicked on the window (not outside of the boundaries).
+        // Check the user clicked on the window (not outside the boundaries).
         if (mouse_x < 0.0 || mouse_x > 1.0 || mouse_y < 0.0 || mouse_y > 1.0)
         {
             return;
