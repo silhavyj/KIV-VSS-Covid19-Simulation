@@ -13,7 +13,8 @@ namespace kiv_vss::gui
         /// Creates an instance of the class. 
         /// \param simulation Backend logic of the simulation
         /// \param simulating_running Flag indicating whether the simulation is running (no real-time change of settings)
-        explicit CSettings_Window(CSimulation* simulation, const bool* simulating_running);
+        /// \param general_settings_changed Flag whether the user has changed the general settings
+        explicit CSettings_Window(CSimulation* simulation, const bool* simulating_running, bool* general_settings_changed);
 
         /// Default destructor.
         ~CSettings_Window() override = default;
@@ -39,6 +40,7 @@ namespace kiv_vss::gui
 
     private:
         const bool* m_simulating_running; ///< Flag indicating if the simulation is running or not
+        bool* m_general_settings_changed; ///< Flag whether the user has changed the general settings
     };
 }
 

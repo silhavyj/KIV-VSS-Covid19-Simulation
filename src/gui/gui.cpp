@@ -18,9 +18,10 @@ namespace kiv_vss::gui
     static bool s_simulation_over{false};
     static bool s_simulation_running{false};
     static bool s_display_popular_locations{true};
+    static bool s_general_settings_changed{false};
 
     // Create individual windows that make up the GUI.
-    static CSettings_Window s_settings_window(s_simulation, &s_simulation_running);
+    static CSettings_Window s_settings_window(s_simulation, &s_simulation_running, &s_general_settings_changed);
     static CSimulation_Window s_simulation_window(s_simulation, &s_display_popular_locations, &s_simulation_running);
     static CPlots_Window s_plots_window(s_simulation);
     static CStatistics_Window s_statistics_window(s_simulation);
@@ -75,7 +76,7 @@ namespace kiv_vss::gui
         ImGui::Begin("Control");
 
         // Play / Pause button
-        if (ImGui::Button("Play / Pause"))
+        if (!s_general_settings_changed && ImGui::Button("Play / Pause"))
         {
             s_play = !s_play;
         }
@@ -96,6 +97,7 @@ namespace kiv_vss::gui
             s_play = false;
             s_simulation_over = false;
             s_simulation_running = false;
+            s_general_settings_changed = false;
         }
 
         ImGui::Separator();

@@ -3,9 +3,10 @@
 
 namespace kiv_vss::gui
 {
-    CSettings_Window::CSettings_Window(CSimulation* simulation, const bool* simulating_running)
+    CSettings_Window::CSettings_Window(CSimulation* simulation, const bool* simulating_running, bool* general_settings_changed)
         : GUI_Window(simulation),
-          m_simulating_running{simulating_running}
+          m_simulating_running{simulating_running},
+          m_general_settings_changed{general_settings_changed}
     {
 
     }
@@ -69,9 +70,14 @@ namespace kiv_vss::gui
 
     inline void CSettings_Window::Render_General_Settings() const
     {
-        ImGui::SliderInt("Number of people", reinterpret_cast<int *>(&m_config->general.number_of_people), 10, 1500);
-        ImGui::SliderInt("Number of initially infected people", reinterpret_cast<int *>(&m_config->general.number_of_initially_infected_people), 1, 20);
-        ImGui::SliderFloat("% of self isolating people", &m_config->general.ratio_of_people_in_self_isolation, 0.0f, 1.0f);
+        if ((ImGui::SliderInt("Number of people", reinterpret_cast<int *>(&m_config->general.number_of_people), 10, 1500)) ||
+            (ImGui::SliderInt("Number of initially infected people", reinterpret_cast<int *>(&m_config->general.number_of_initially_infected_people), 1, 20)) ||
+            (ImGui::SliderFloat("% of self isolating people", &m_config->general.ratio_of_people_in_self_isolation, 0.0f, 1.0f)))
+        {
+            // The user is required to press the reset button.
+            *m_general_settings_changed = true;
+        }
+
         ImGui::SliderFloat("Saturation level", &m_config->general.saturation_level, 0.0f, 1.0f);
     }
 
