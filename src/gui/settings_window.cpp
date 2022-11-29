@@ -55,6 +55,8 @@ namespace kiv_vss::gui
                 Render_Mobility_Settings();
                 ImGui::EndTabItem();
             }
+
+            ImGui::EndTabBar();
         }
     }
 
