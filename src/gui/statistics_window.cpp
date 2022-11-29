@@ -10,8 +10,10 @@ namespace kiv_vss::gui
 
     void CStatistics_Window::Render()
     {
+        // Start the window.
         ImGui::Begin("Statistics");
 
+        // Retrieve the statistics of the simulation.
         const auto& statistics = m_simulation->Get_Statistics();
 
         ImGui::Text("System saturated = %s", m_simulation->Is_System_Saturated() ? "YES\0" : "NO\0");
@@ -28,6 +30,7 @@ namespace kiv_vss::gui
         ImGui::Text("Total fatality rate = %.2f [%%]", Get_Number_Of_People_Percentage(statistics.number_of_fatalities));
         ImGui::Text("Number of contractions per person = %.2f", statistics.time.empty() ? 0.0 : statistics.number_of_contractions_per_person.back());
 
+        // End the window.
         ImGui::End();
     }
 
