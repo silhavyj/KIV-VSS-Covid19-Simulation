@@ -1,3 +1,4 @@
+
 #include "settings_window.h"
 
 namespace kiv_vss::gui
@@ -11,7 +12,11 @@ namespace kiv_vss::gui
 
     void CSettings_Window::Render()
     {
+        // Start the window
         ImGui::Begin("Settings");
+
+        // Do not to allow the user to change 
+        // any settings if the simulation is running.
         if (*m_simulating_running)
         {
             Render_Simulation_Running_Message();
@@ -20,25 +25,31 @@ namespace kiv_vss::gui
         {
             Render_Settings();
         }
+
+        // End the window
         ImGui::End();
     }
 
     inline void CSettings_Window::Render_Settings() const
     {
+        // Render different setting tabs.
         if (ImGui::BeginTabBar("tabs"))
         {
+            // General setting
             if (ImGui::BeginTabItem("General"))
             {
                 Render_General_Settings();
                 ImGui::EndTabItem();
             }
 
+            // Disease setting
             if (ImGui::BeginTabItem("Disease"))
             {
                 Render_Disease_Settings();
                 ImGui::EndTabItem();
             }
 
+            // Mobility setting
             if (ImGui::BeginTabItem("Mobility"))
             {
                 Render_Mobility_Settings();
@@ -49,6 +60,8 @@ namespace kiv_vss::gui
 
     inline void CSettings_Window::Render_Simulation_Running_Message() const
     {
+        // Display a message to the user that the simulation is currently
+        // and no changes can me made to it.
         ImGui::Text("The simulation is currently running.\nYou have to wait until it finishes or gets reset to be able to make changes to it.");
     }
 
