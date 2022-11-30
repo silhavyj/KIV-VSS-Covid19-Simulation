@@ -114,6 +114,13 @@ namespace kiv_vss::gui
         {
             Render_Popular_Places_Table();
         }
+        if (s_simulation_over)
+        {
+            if (ImGui::Button("Save statistics"))
+            {
+                // TODO save statistics
+            }
+        }
 
         // End the window.
         ImGui::End();
@@ -129,7 +136,9 @@ namespace kiv_vss::gui
         auto& popular_locations = s_simulation->Get_Popular_Locations();
 
         // Flags (design) of the table
-        static ImGuiTableFlags flags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable;
+        static ImGuiTableFlags flags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg     |
+                                       ImGuiTableFlags_Borders        | ImGuiTableFlags_Resizable |
+                                       ImGuiTableFlags_Reorderable    | ImGuiTableFlags_Hideable;
 
         if (ImGui::BeginTable("Popular locations", 3, flags))
         {
@@ -153,16 +162,14 @@ namespace kiv_vss::gui
                 ImGui::TableSetColumnIndex(1);
                 if (ImGui::InputDouble(Get_Input_Name(i, "x").c_str(), popular_locations[i].Get_X_Ptr(), 10, 1, "%.2f"))
                 {
-                    // TODO
-                    // *popular_locations[i].Get_X_Ptr() = std::max(0.0, std::min(s_config->general.world_size, popular_locations[i].Get_X()));
+                    *popular_locations[i].Get_X_Ptr() = std::max(0.0, std::min(static_cast<double>(s_config->general.world_size), popular_locations[i].Get_X()));
                 }
 
                 // First column (Y position).
                 ImGui::TableSetColumnIndex(2);
                 if (ImGui::InputDouble(Get_Input_Name(i, "y").c_str(), popular_locations[i].Get_Y_Ptr(), 10, 1, "%.2f"))
                 {
-                    // TODO
-                    // *popular_locations[i].Get_Y_Ptr() = std::max(0.0, std::min(s_config->general.world_size, popular_locations[i].Get_Y()));
+                    *popular_locations[i].Get_Y_Ptr() = std::max(0.0, std::min(static_cast<double>(s_config->general.world_size), popular_locations[i].Get_Y()));
                 }
             }
 
