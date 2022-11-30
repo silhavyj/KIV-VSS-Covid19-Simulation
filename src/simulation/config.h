@@ -11,7 +11,7 @@ namespace kiv_vss
         std::size_t number_of_initially_infected_people{5}; ///< Number of initially infected people
         float ratio_of_people_in_self_isolation{0.5};       ///< Percentage of people in self-isolation
         float saturation_level{0.2};                        ///< Percentage of when the health care system becomes saturated
-        double world_size{2000};                            ///< Square dimensions of the world
+        float world_size{2000};                             ///< Square dimensions of the world
     };
 
     /// Configuration regarding the disease

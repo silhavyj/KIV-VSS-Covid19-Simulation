@@ -153,14 +153,16 @@ namespace kiv_vss::gui
                 ImGui::TableSetColumnIndex(1);
                 if (ImGui::InputDouble(Get_Input_Name(i, "x").c_str(), popular_locations[i].Get_X_Ptr(), 10, 1, "%.2f"))
                 {
-                    *popular_locations[i].Get_X_Ptr() = std::max(0.0, std::min(s_config->general.world_size, popular_locations[i].Get_X()));
+                    // TODO
+                    // *popular_locations[i].Get_X_Ptr() = std::max(0.0, std::min(s_config->general.world_size, popular_locations[i].Get_X()));
                 }
 
                 // First column (Y position).
                 ImGui::TableSetColumnIndex(2);
                 if (ImGui::InputDouble(Get_Input_Name(i, "y").c_str(), popular_locations[i].Get_Y_Ptr(), 10, 1, "%.2f"))
                 {
-                    *popular_locations[i].Get_Y_Ptr() = std::max(0.0, std::min(s_config->general.world_size, popular_locations[i].Get_Y()));
+                    // TODO
+                    // *popular_locations[i].Get_Y_Ptr() = std::max(0.0, std::min(s_config->general.world_size, popular_locations[i].Get_Y()));
                 }
             }
 
