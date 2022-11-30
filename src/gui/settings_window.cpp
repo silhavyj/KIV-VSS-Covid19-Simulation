@@ -72,7 +72,8 @@ namespace kiv_vss::gui
     {
         if ((ImGui::SliderInt("Number of people", reinterpret_cast<int *>(&m_config->general.number_of_people), 10, 1500)) ||
             (ImGui::SliderInt("Number of initially infected people", reinterpret_cast<int *>(&m_config->general.number_of_initially_infected_people), 1, 20)) ||
-            (ImGui::SliderFloat("% of self isolating people", &m_config->general.ratio_of_people_in_self_isolation, 0.0f, 1.0f)))
+            (ImGui::SliderFloat("% of self isolating people", &m_config->general.ratio_of_people_in_self_isolation, 0.0f, 1.0f)) ||
+            (ImGui::SliderInt("World Size", reinterpret_cast<int *>(&m_config->general.world_size), 100, 10000)))
         {
             // The user is required to press the reset button.
             *m_general_settings_changed = true;
