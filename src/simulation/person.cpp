@@ -1,6 +1,6 @@
 #include "utils.h"
 #include "person.h"
-#include "singleton.h"
+#include "../utils/singleton.h"
 
 namespace kiv_vss
 {

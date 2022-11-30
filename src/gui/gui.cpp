@@ -8,10 +8,13 @@
 #include "plots_window.h"
 #include "statistics_window.h"
 
+#include "../utils/singleton.h"
+
 namespace kiv_vss::gui
 {
     // Simulation (backend logic)
     static CSimulation* s_simulation = new CSimulation;
+    static const auto s_config = Singleton<TConfig>::Get_Instance();
 
     static bool s_play{false};
     static bool s_stop_simulation_when_nobody_infected{true};
@@ -50,7 +53,7 @@ namespace kiv_vss::gui
         // Just for test/development purposes
         //
         // ImPlot::ShowDemoWindow();
-        ImGui::ShowDemoWindow();
+        // ImGui::ShowDemoWindow();
     }
 
     inline static void Update_Simulation()
@@ -119,8 +122,7 @@ namespace kiv_vss::gui
     static void Render_Popular_Places_Table()
     {
         const auto Get_Input_Name = [](int index, const char* desc) {
-            std::string name = std::to_string(index) + std::string(desc);
-            return name.c_str();
+            return std::to_string(index) + std::string(desc);
         };
 
         // Retrieve all popular locations.
@@ -149,11 +151,17 @@ namespace kiv_vss::gui
 
                 // First column (X position).
                 ImGui::TableSetColumnIndex(1);
-                ImGui::InputDouble(Get_Input_Name(i, "x"), popular_locations[i].Get_X(), 10, 1, "%.2f");
+                if (ImGui::InputDouble(Get_Input_Name(i, "x").c_str(), popular_locations[i].Get_X_Ptr(), 10, 1, "%.2f"))
+                {
+                    *popular_locations[i].Get_X_Ptr() = std::max(0.0, std::min(s_config->general.world_size, popular_locations[i].Get_X()));
+                }
 
                 // First column (Y position).
                 ImGui::TableSetColumnIndex(2);
-                ImGui::InputDouble(Get_Input_Name(i, "y"), popular_locations[i].Get_Y(), 10, 1, "%.2f");
+                if (ImGui::InputDouble(Get_Input_Name(i, "y").c_str(), popular_locations[i].Get_Y_Ptr(), 10, 1, "%.2f"))
+                {
+                    *popular_locations[i].Get_Y_Ptr() = std::max(0.0, std::min(s_config->general.world_size, popular_locations[i].Get_Y()));
+                }
             }
 
             ImGui::EndTable();

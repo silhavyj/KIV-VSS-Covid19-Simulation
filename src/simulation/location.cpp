@@ -41,12 +41,12 @@ namespace kiv_vss
         return m_x;
     }
 
-    double* CLocation::Get_Y() noexcept
+    double* CLocation::Get_Y_Ptr() noexcept
     {
         return &m_y;
     }
 
-    double* CLocation::Get_X() noexcept
+    double* CLocation::Get_X_Ptr() noexcept
     {
         return &m_x;
     }

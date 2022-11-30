@@ -1,5 +1,5 @@
 #include "utils.h"
-#include "singleton.h"
+#include "../utils/singleton.h"
 #include "infection_model.h"
 
 namespace kiv_vss

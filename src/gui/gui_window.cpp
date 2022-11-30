@@ -1,5 +1,5 @@
 #include "gui_window.h"
-#include "../simulation/singleton.h"
+#include "../utils/singleton.h"
 
 namespace kiv_vss::gui
 {

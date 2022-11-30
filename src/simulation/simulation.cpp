@@ -3,7 +3,7 @@
 #include "spdlog/spdlog.h"
 
 #include "utils.h"
-#include "singleton.h"
+#include "../utils/singleton.h"
 #include "simulation.h"
 
 namespace kiv_vss

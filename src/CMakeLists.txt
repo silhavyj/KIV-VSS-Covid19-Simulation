@@ -25,9 +25,6 @@ add_executable(${EXECUTABLE_NAME}
     ${implot_SOURCE_DIR}/implot_demo.cpp
     ${implot_SOURCE_DIR}/implot_internal.h
     ${implot_SOURCE_DIR}/implot_items.cpp
-
-    #${json_SOURCE_DIR}/single_include/nlohmann/json.hpp
-    #${json_SOURCE_DIR}/single_include/nlohmann/json_fwd.hpp
 ) 
 
 target_compile_definitions(${EXECUTABLE_NAME}

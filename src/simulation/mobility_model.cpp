@@ -1,7 +1,7 @@
 #include "spdlog/spdlog.h"
 
 #include "utils.h"
-#include "singleton.h"
+#include "../utils/singleton.h"
 #include "mobility_model.h"
 
 namespace kiv_vss

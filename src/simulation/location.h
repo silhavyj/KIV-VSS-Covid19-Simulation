@@ -59,7 +59,7 @@ namespace kiv_vss
 
         /// Returns a pointer to the Y coordinate of the location.
         /// \return Y coordinate
-        [[nodiscard]] double* Get_Y() noexcept;
+        [[nodiscard]] double* Get_Y_Ptr() noexcept;
 
         /// Returns the X coordinate of the location.
         /// \return X coordinate
@@ -67,7 +67,7 @@ namespace kiv_vss
 
         /// Returns a pointer to the  X coordinate of the location.
         /// \return X coordinate
-        [[nodiscard]] double* Get_X() noexcept;
+        [[nodiscard]] double* Get_X_Ptr() noexcept;
 
         /// Returns both coordinates ([Y; X]).
         /// @return Both coordinates of the location
