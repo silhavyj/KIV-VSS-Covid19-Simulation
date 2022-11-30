@@ -41,6 +41,16 @@ namespace kiv_vss
         return m_x;
     }
 
+    double* CLocation::Get_Y() noexcept
+    {
+        return &m_y;
+    }
+
+    double* CLocation::Get_X() noexcept
+    {
+        return &m_x;
+    }
+
     CLocation::Point CLocation::Get_Coordinates() const noexcept
     {
         return { Get_Y(), Get_X() };

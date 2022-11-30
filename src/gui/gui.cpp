@@ -50,7 +50,7 @@ namespace kiv_vss::gui
         // Just for test/development purposes
         //
         // ImPlot::ShowDemoWindow();
-        // ImGui::ShowDemoWindow();
+        ImGui::ShowDemoWindow();
     }
 
     inline static void Update_Simulation()
@@ -106,7 +106,11 @@ namespace kiv_vss::gui
         ImGui::Checkbox("Display popular locations", &s_display_popular_locations);
 
         ImGui::Separator();
-        Render_Popular_Places_Table();
+
+        if (!s_simulation_running)
+        {
+            Render_Popular_Places_Table();
+        }
 
         // End the window.
         ImGui::End();
@@ -114,24 +118,44 @@ namespace kiv_vss::gui
 
     static void Render_Popular_Places_Table()
     {
-        // TODO
+        const auto Get_Input_Name = [](int index, const char* desc) {
+            std::string name = std::to_string(index) + std::string(desc);
+            return name.c_str();
+        };
 
+        // Retrieve all popular locations.
+        auto& popular_locations = s_simulation->Get_Popular_Locations();
+
+        // Flags (design) of the table
         static ImGuiTableFlags flags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_RowBg | ImGuiTableFlags_Borders | ImGuiTableFlags_Resizable | ImGuiTableFlags_Reorderable | ImGuiTableFlags_Hideable;
-        if (ImGui::BeginTable("table1", 3, flags))
+
+        if (ImGui::BeginTable("Popular locations", 3, flags))
         {
+            // Headings
             ImGui::TableSetupColumn("Index", ImGuiTableColumnFlags_WidthFixed);
             ImGui::TableSetupColumn("Y", ImGuiTableColumnFlags_WidthFixed);
             ImGui::TableSetupColumn("X", ImGuiTableColumnFlags_WidthStretch);
+
             ImGui::TableHeadersRow();
-            for (int row = 0; row < 5; row++)
+
+            for (std::size_t i = 0; i < popular_locations.size(); ++i)
             {
+                // Start a new table row.
                 ImGui::TableNextRow();
-                for (int column = 0; column < 3; column++)
-                {
-                    ImGui::TableSetColumnIndex(column);
-                    ImGui::Text("%s %d,%d", (column == 2) ? "Stretch" : "Fixed", column, row);
-                }
+
+                // First column (index).
+                ImGui::TableSetColumnIndex(0);
+                ImGui::Text("%ld", i);
+
+                // First column (X position).
+                ImGui::TableSetColumnIndex(1);
+                ImGui::InputDouble(Get_Input_Name(i, "x"), popular_locations[i].Get_X(), 10, 1, "%.2f");
+
+                // First column (Y position).
+                ImGui::TableSetColumnIndex(2);
+                ImGui::InputDouble(Get_Input_Name(i, "y"), popular_locations[i].Get_Y(), 10, 1, "%.2f");
             }
+
             ImGui::EndTable();
         }
     }

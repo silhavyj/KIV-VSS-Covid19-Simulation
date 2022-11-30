@@ -67,6 +67,11 @@ namespace kiv_vss
         /// \return List of popular places
         [[nodiscard]] const std::vector<CLocation>& Get_Popular_Locations() const noexcept;
 
+        /// Returns the list of popular locations.
+        /// This method is called from the GUI for visualization purposes.
+        /// \return List of popular places
+        [[nodiscard]] std::vector<CLocation>& Get_Popular_Locations() noexcept;
+
         /// Returns whether the health case system is saturated or not.
         /// The system is saturated when at least 20% of people are sick at once.
         /// However, this parameter is adjustable through the GUI.

@@ -65,6 +65,11 @@ namespace kiv_vss
         return m_popular_locations;
     }
 
+    std::vector<CLocation>& CSimulation::Get_Popular_Locations() noexcept
+    {
+        return m_popular_locations;
+    }
+
     void CSimulation::Generate_Population()
     {
         // Calculate how many people will be voluntarily quarantining.

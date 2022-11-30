@@ -53,13 +53,21 @@ namespace kiv_vss
         /// \return True, if the two locations are NOT the same. False, otherwise.
         [[nodiscard]] bool operator!=(const CLocation& location) const;
 
-        /// Return the Y coordinate of the location.
+        /// Returns the Y coordinate of the location.
         /// \return Y coordinate
         [[nodiscard]] double Get_Y() const noexcept;
 
-        /// Return the X coordinate of the location.
+        /// Returns a pointer to the Y coordinate of the location.
+        /// \return Y coordinate
+        [[nodiscard]] double* Get_Y() noexcept;
+
+        /// Returns the X coordinate of the location.
         /// \return X coordinate
         [[nodiscard]] double Get_X() const noexcept;
+
+        /// Returns a pointer to the  X coordinate of the location.
+        /// \return X coordinate
+        [[nodiscard]] double* Get_X() noexcept;
 
         /// Returns both coordinates ([Y; X]).
         /// @return Both coordinates of the location
