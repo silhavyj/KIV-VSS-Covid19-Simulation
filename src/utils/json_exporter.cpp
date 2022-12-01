@@ -7,7 +7,7 @@
 
 namespace kiv_vss::utils
 {
-    void Export_Statistics(const char* filename, const CSimulation::TStatistics& statistics)
+    bool Export_Statistics(const char* filename, const CSimulation::TStatistics& statistics)
     {
         nlohmann::json::array_t data;
 
@@ -27,11 +27,11 @@ namespace kiv_vss::utils
         if (file)
         {
             file << data;
-            spdlog::info("Data saved successfully");
+            spdlog::info("Data was saved successfully to '{}'", filename);
+            return true;
         }
-        else
-        {
-            spdlog::error("Failed to open file '{}'", filename);
-        }
+
+        spdlog::error("Failed to open file '{}'", filename);
+        return false;
     }
 }

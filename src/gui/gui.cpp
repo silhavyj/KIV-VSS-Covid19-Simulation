@@ -23,12 +23,16 @@ namespace kiv_vss::gui
     static bool s_simulation_running{false};
     static bool s_display_popular_locations{true};
     static bool s_general_settings_changed{false};
+    static bool s_show_save_button{false};
 
     // Create individual windows that make up the GUI.
     static CSettings_Window s_settings_window(s_simulation, &s_simulation_running, &s_general_settings_changed);
     static CSimulation_Window s_simulation_window(s_simulation, &s_display_popular_locations, &s_simulation_running);
     static CPlots_Window s_plots_window(s_simulation);
     static CStatistics_Window s_statistics_window(s_simulation);
+
+    inline constexpr std::size_t Filename_Size = 64;
+    static char s_filename[Filename_Size];
 
     // Store the windows into a polymorphic container.
     static const std::vector<GUI_Window *> s_windows = {
@@ -70,6 +74,7 @@ namespace kiv_vss::gui
             {
                 s_simulation_over = s_simulation->Is_Simulation_Over();
                 s_simulation_running = !s_simulation_over;
+                s_show_save_button = s_simulation_over;
             }
         }
     }
@@ -111,16 +116,22 @@ namespace kiv_vss::gui
 
         ImGui::Separator();
 
+        // Render table with the coordinates of the popular places
         if (!s_simulation_running)
         {
             Render_Popular_Places_Table();
         }
-        if (s_simulation_over)
+
+        // Save statistics
+        if (s_simulation_over && s_show_save_button)
         {
+            ImGui::InputText("Filename", s_filename, Filename_Size);
             if (ImGui::Button("Save statistics"))
             {
-                // TODO save statistics
-                utils::Export_Statistics("data.json", s_simulation->Get_Statistics());
+                if (utils::Export_Statistics(s_filename, s_simulation->Get_Statistics()))
+                {
+                    s_show_save_button = false;
+                }
             }
         }
 

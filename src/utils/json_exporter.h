@@ -4,5 +4,5 @@
 
 namespace kiv_vss::utils
 {
-    void Export_Statistics(const char* filename, const CSimulation::TStatistics& statistics);
+    bool Export_Statistics(const char* filename, const CSimulation::TStatistics& statistics);
 }
