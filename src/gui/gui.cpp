@@ -9,6 +9,7 @@
 #include "statistics_window.h"
 
 #include "../utils/singleton.h"
+#include "../utils/json_exporter.h"
 
 namespace kiv_vss::gui
 {
@@ -119,6 +120,7 @@ namespace kiv_vss::gui
             if (ImGui::Button("Save statistics"))
             {
                 // TODO save statistics
+                utils::Export_Statistics("data.json", s_simulation->Get_Statistics());
             }
         }
 
