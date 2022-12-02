@@ -21,7 +21,7 @@ int main(int argc, const char* argv[])
 
     spdlog::set_level(spdlog::level::debug);
 
-    glfwSetErrorCallback([](int error_code, const char* description) {
+    glfwSetErrorCallback([](int error_code, const char* description) -> void {
         spdlog::error("GLFW Error {} : {}\n", error_code, description);
     });
 

@@ -54,7 +54,7 @@ namespace kiv_vss::utils
         const double value = uniform_dist(rand_dev);
 
         // Binary search the interval the random number falls into.
-        auto it = std::upper_bound(samples.begin(), samples.end(), value, [&](double probability, const TSample& sample) {
+        auto it = std::upper_bound(samples.begin(), samples.end(), value, [&](double probability, const TSample& sample) -> bool {
             return probability < sample.probability;
         });
 

@@ -28,12 +28,16 @@ namespace kiv_vss::gui
             ImDrawList* draw_list = ImGui::GetWindowDrawList();
 
             // Render the people (one by one);
-            std::for_each(people.begin(), people.end(), [&](auto person) { Draw_Person(person, draw_list); });
+            std::for_each(people.begin(), people.end(), [&](auto person) -> void {
+                Draw_Person(person, draw_list); 
+            });
 
             // Render the popular places if the user checked the checkbox.
             if (*m_display_popular_locations)
             {
-                std::for_each(popular_locations.begin(), popular_locations.end(), [&](auto location) { Draw_Popular_Location(location, draw_list); });
+                std::for_each(popular_locations.begin(), popular_locations.end(), [&](auto location) -> void {
+                    Draw_Popular_Location(location, draw_list); 
+                });
             }
 
             // Check if the user clicked on the screen.

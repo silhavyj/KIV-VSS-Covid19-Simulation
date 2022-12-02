@@ -86,7 +86,7 @@ namespace kiv_vss
     CLocation CMobility_Model::Pick_Next_Location() const
     {
         // Helper lambda function - creates a list of probabilities.
-        const auto Construct_Transition_Probabilities = [&](const TMobility::TTransition& transition)
+        const auto Construct_Transition_Probabilities = [&](const TMobility::TTransition& transition) -> std::vector<double>
         {
             std::vector<double> probabilities = {
                 transition.go_to_random_location_prob,

@@ -85,7 +85,7 @@ namespace kiv_vss
     CLocation CLocation::Generate_Random_In_Square_Location(double min, double max)
     {
         // Helper lambda function to generate a random coordinate.
-        const auto Get_Random_Axis = [&]()
+        const auto Get_Random_Axis = [&]() -> double
         {
             return utils::Random<std::uniform_real_distribution<double>>(min, max);
         };

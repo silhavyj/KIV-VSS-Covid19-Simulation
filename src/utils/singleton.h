@@ -17,7 +17,7 @@ namespace kiv_vss
         static T* Get_Instance()
         {
             // Make sure the class gets instantiated only once.
-            std::call_once(s_init_flag, [=]() {
+            std::call_once(s_init_flag, [=]() -> void {
                 Singleton<T>::s_instance = std::make_unique<T>();
             });
 

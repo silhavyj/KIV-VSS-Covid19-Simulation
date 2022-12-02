@@ -53,7 +53,9 @@ namespace kiv_vss::gui
         Update_Simulation();
 
         // Render individual windows.
-        std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) { window->Render(); });
+        std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) -> void {
+            window->Render(); 
+        });
 
         // Just for test/development purposes
         //
@@ -101,7 +103,9 @@ namespace kiv_vss::gui
             s_simulation = new CSimulation;
 
             // Set the new simulation to all windows.
-            std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) { window->Set_Simulation(s_simulation); });
+            std::for_each(s_windows.begin(), s_windows.end(), [&](auto& window) -> void {
+                window->Set_Simulation(s_simulation); 
+            });
 
             s_play = false;
             s_simulation_over = false;
@@ -141,7 +145,7 @@ namespace kiv_vss::gui
 
     static void Render_Popular_Places_Table()
     {
-        const auto Get_Input_Name = [](int index, const char* desc) {
+        const auto Get_Input_Name = [](int index, const char* desc) -> std::string {
             return std::to_string(index) + std::string(desc);
         };
 
