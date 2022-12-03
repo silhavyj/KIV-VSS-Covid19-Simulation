@@ -37,3 +37,5 @@ namespace kiv_vss::utils
         return false;
     }
 }
+
+// EOF

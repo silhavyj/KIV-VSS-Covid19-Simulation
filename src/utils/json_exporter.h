@@ -10,3 +10,5 @@ namespace kiv_vss::utils
     /// \return True, if the values were saved successfully, false otherwise.
     bool Export_Statistics(const char* filename, const CSimulation::TStatistics& statistics);
 }
+
+// EOF
