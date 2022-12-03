@@ -2,7 +2,7 @@
 
 #include "spdlog/spdlog.h"
 
-#include "utils.h"
+#include "../utils/statistics.h"
 #include "../utils/singleton.h"
 #include "simulation.h"
 

@@ -1,7 +1,7 @@
 #include <cmath>
 #include <sstream>
 
-#include "utils.h"
+#include "../utils/statistics.h"
 #include "location.h"
 
 namespace kiv_vss

@@ -1,4 +1,4 @@
-#include "utils.h"
+#include "../utils/statistics.h"
 #include "../utils/singleton.h"
 #include "infection_model.h"
 

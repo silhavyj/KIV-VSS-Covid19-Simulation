@@ -11,6 +11,7 @@ namespace kiv_vss::utils
     {
         nlohmann::json::array_t data;
 
+        // Construct a JSON object (array).
         for (std::size_t i = 0; i < statistics.time.size(); ++i)
         {
             const nlohmann::json record = {
@@ -23,6 +24,7 @@ namespace kiv_vss::utils
             data.push_back(record);
         }
 
+        // Store the data into the file.
         std::fstream file(filename, std::ios::out);
         if (file)
         {
