@@ -7,11 +7,11 @@ import statistics
 data = {}
 
 def load_data(folder):
-    path = f'../measured_data/{folder}/'
+    path = f'../measured_data/self_isolation/{folder}/'
     filenames = next(walk(path), (None, None, []))[2]
 
     for filename in filenames:
-        with open(f'../measured_data/{folder}/' + filename, "r") as file:
+        with open(f'../measured_data/self_isolation/{folder}/' + filename, "r") as file:
             local_data = json.load(file)
             if folder not in data:
                 data[folder] = []

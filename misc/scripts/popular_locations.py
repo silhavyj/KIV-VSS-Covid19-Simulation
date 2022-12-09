@@ -6,11 +6,11 @@ import numpy as np
 data = {}
 
 def load_data(folder):
-    path = f'../measured_data/self_isolation/{folder}/'
+    path = f'../measured_data/popular_locations/{folder}/'
     filenames = next(walk(path), (None, None, []))[2]
 
     for filename in filenames:
-        with open(f'../measured_data/self_isolation/{folder}/' + filename, "r") as file:
+        with open(f'../measured_data/popular_locations/{folder}/' + filename, "r") as file:
             local_data = json.load(file)
             if folder not in data:
                 data[folder] = {}
@@ -21,13 +21,19 @@ def load_data(folder):
          
          
 def plot_data(data):
-    for folder in ['20', '40', '60', '80']:
+    labels = {
+        '1250': '500',
+        '1500': '1000',
+        '1750': '1500',
+        '2000': '2000'    
+    }
+    for folder in ['1250', '1500', '1750', '2000']:
         lists = sorted(data[folder].items())
         x, y = zip(*lists)
         
         plt.xlabel("time [days]")
         plt.ylabel("Infected people [%]")
-        plt.plot(x, y, linestyle = 'solid', marker = 'o', markersize = 4, label=folder + "%")
+        plt.plot(x, y, linestyle = 'solid', marker = 'o', markersize = 4, label=labels[folder] + "m")
 
     plt.grid(axis='y')
     plt.grid(axis='x')
@@ -35,9 +41,9 @@ def plot_data(data):
     plt.show()
     
 
-load_data('20')
-load_data('40')
-load_data('60')
-load_data('80')
+load_data('1250')
+load_data('1500')
+load_data('1750')
+load_data('2000')
 
 plot_data(data)

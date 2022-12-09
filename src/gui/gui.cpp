@@ -161,8 +161,8 @@ namespace kiv_vss::gui
         {
             // Headings
             ImGui::TableSetupColumn("Index", ImGuiTableColumnFlags_WidthFixed);
-            ImGui::TableSetupColumn("Y", ImGuiTableColumnFlags_WidthFixed);
-            ImGui::TableSetupColumn("X", ImGuiTableColumnFlags_WidthStretch);
+            ImGui::TableSetupColumn("X", ImGuiTableColumnFlags_WidthFixed);
+            ImGui::TableSetupColumn("Y", ImGuiTableColumnFlags_WidthStretch);
 
             ImGui::TableHeadersRow();
 
