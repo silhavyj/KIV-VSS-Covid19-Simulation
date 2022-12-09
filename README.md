@@ -17,6 +17,8 @@ In order to successfully build the application, you need to have `CMake` on your
 - https://github.com/gabime/spdlog
 - https://github.com/nlohmann/json
 
+> **_NOTE:_**  The entire process of building the application may take a few minutes, so please be patient.
+
 
 ```
 cmake -S . -B build/release -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
