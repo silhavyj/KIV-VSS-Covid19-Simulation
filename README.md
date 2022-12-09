@@ -2,7 +2,7 @@
 
 ## Requirements
 
-In order to successfully build the application, you need to have `CMake` on your machine. Furthermore, you need to have installed `mingw32-make`, if you are on Windows, or `g++`, if you are on Linux. 
+In order to successfully build the application, you need to have `CMake` on your machine. Furthermore, if you are on a Windows machine, you need to have installed `mingw32-make`.
 
 ### Build
 
