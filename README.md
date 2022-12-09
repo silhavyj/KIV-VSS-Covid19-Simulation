@@ -8,7 +8,7 @@ In order to successfully build the application, you need to have `CMake` on your
 
 #### Dependencies
 
-`CMake` automatically pulls down additional dependencies from `GitHub` that required by the application.
+`CMake` automatically pulls down additional dependencies from `GitHub` that are required by the application.
 
 - https://github.com/Perlmint/glew-cmake.git
 - https://github.com/glfw/glfw
