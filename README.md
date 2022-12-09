@@ -6,7 +6,7 @@ In order to successfully build the application, you need to have `CMake` on your
 
 ### Build
 
-### Dependencies
+#### Dependencies
 
 `CMake` automatically pulls down additional dependencies from `GitHub` that required by the application.
 
@@ -17,13 +17,11 @@ In order to successfully build the application, you need to have `CMake` on your
 - https://github.com/gabime/spdlog
 - https://github.com/nlohmann/json
 
-> **_NOTE:_**  The entire process of building the application may take a few minutes, so please be patient.
-
 
 ```
 cmake -S . -B build/release -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release
 ```
-### Linux
+#### Linux
 
 ```
 make -C build/release
@@ -33,7 +31,7 @@ make -C build/release
 ./build/release/src/covid19_sim misc/fonts/Cousine-Regular.ttf
 ```
 
-### Windows
+#### Windows
 
 ```
 mingw32-make -C build\release
@@ -42,3 +40,5 @@ mingw32-make -C build\release
 ```
 build\release\src\covid19_sim.exe misc\fonts\Cousine-Regular.ttf
 ```
+
+> **_NOTE:_**  The entire process of building the application may take a few minutes, so please be patient.
