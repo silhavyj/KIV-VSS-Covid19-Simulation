@@ -1,8 +1,10 @@
+# Covid19 Outbreak Simulation
+
 <img src="img/demo.gif">
 
 ## Requirements
 
-In order to successfully build the application, you need to have `CMake` on your machine. Furthermore, if you are on a Windows machine, you need to have installed `mingw32-make`.
+In order to successfully build the application, you need to have `CMake` installed on your machine. Furthermore, if you are using Windows, you need to have installed `mingw32-make`.
 
 ### Build
 
