@@ -32,6 +32,7 @@ def plot_data(data):
 
     plt.grid(axis='y')
     plt.grid(axis='x')
+    plt.title('Comparision of different immunity periods')
     plt.legend()
     plt.show()
     
