@@ -34,10 +34,10 @@ def plot_data(data):
 
     ax.set_axisbelow(True)
     ax.grid(axis='y')
-    plt.title('Fatality rate based on the percentage of people practising self-isolation')
     plt.legend()
     plt.show()
     
+plt.rcParams.update({'font.size': 16})
 
 load_data('20')
 load_data('40')

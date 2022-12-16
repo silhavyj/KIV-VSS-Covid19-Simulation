@@ -32,10 +32,10 @@ def plot_data(data):
 
     plt.grid(axis='y')
     plt.grid(axis='x')
-    plt.title('Comparision of different immunity periods')
     plt.legend()
     plt.show()
     
+plt.rcParams.update({'font.size': 16})
 
 load_data('01')
 load_data('14')

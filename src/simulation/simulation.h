@@ -122,7 +122,7 @@ namespace kiv_vss
         TStatistics m_statistics;                           ///< Statistical values measured throughout the simulation
         std::size_t m_time;                                 ///< Time (it increases with each update of the simulation)
         bool m_system_saturated;                            ///< Flag indicating whether the system is saturated or not
-        std::size_t m_max_number_of_infected_people;        ///< Peek in the number of infected people
+        std::size_t m_max_number_of_infected_people;        ///< Peak in the number of infected people
     };
 }
 
